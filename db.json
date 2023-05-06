@@ -1,0 +1,24 @@
+{
+  "encomendas": [
+    {
+      "id": 1,
+      "nomeProduto": "Cadeira Gamer",
+      "dataEntrega": "12/05/2025"
+    },
+    {
+      "id": 2,
+      "nomeProduto": "Sofa",
+      "dataEntrega": "13/05/2025"
+    }
+  ],
+  "inquilinos": [
+    {
+      "cpf": "80256345636",
+      "apartamento": "502"
+    },
+    {
+      "cpf": "012345678936",
+      "apartamento": "812"
+    }
+  ]
+}

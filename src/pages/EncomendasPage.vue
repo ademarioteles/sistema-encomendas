@@ -1,11 +1,11 @@
 <template>
-  <router-view />
+  <h1>Pagina de encomendas</h1>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "App",
+  name: "IndexPage",
 });
 </script>

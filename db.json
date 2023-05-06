@@ -2,13 +2,15 @@
   "encomendas": [
     {
       "id": 1,
-      "nomeProduto": "Cadeira Gamer",
-      "dataEntrega": "12/05/2025"
+      "nomeEncomenda": "Cadeira Gamer",
+      "dataEntrega": "12/05/2025",
+      "status": "Entregue"
     },
     {
       "id": 2,
-      "nomeProduto": "Sofa",
-      "dataEntrega": "13/05/2025"
+      "nomeEncomenda": "Sofa",
+      "dataEntrega": "",
+      "status": "Pendente"
     }
   ],
   "inquilinos": [

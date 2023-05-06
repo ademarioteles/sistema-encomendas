@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-black">
         <q-btn
           flat
           dense
@@ -11,9 +11,12 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Sistema de Encomendas </q-toolbar-title>
+        <q-toolbar-title>
+          <img class="q-mr-sm" src="./../assets/apartments.png" />Condominium
+          Management
+        </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div></div>
       </q-toolbar>
     </q-header>
 
@@ -41,10 +44,10 @@ import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
   {
-    title: "Docs",
+    title: "Encomendas",
     caption: "quasar.dev",
     icon: "school",
-    link: "https://quasar.dev",
+    link: "/encomendas",
   },
   {
     title: "Github",

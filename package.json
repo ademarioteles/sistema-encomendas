@@ -1,8 +1,8 @@
 {
   "name": "sistema-condominio",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "Sistema responsável por gerir as encomendas do condomínio.",
+  "productName": "Condominium Management",
   "author": "Ademario <ademarioteles@hotmail.com>",
   "private": true,
   "scripts": {

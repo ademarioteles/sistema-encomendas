@@ -5,9 +5,11 @@ const routes = [
     children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
   },
   {
-    path: "/login",
+    path: "/encomendas",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
+    children: [
+      { path: "", component: () => import("pages/EncomendasPage.vue") },
+    ],
   }, // Rota que sera usada para as encomendas
 
   // Always leave this as last one,

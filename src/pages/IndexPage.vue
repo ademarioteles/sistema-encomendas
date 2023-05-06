@@ -5,6 +5,7 @@
       v-model="ph"
       label="CPF:"
       placeholder="000.000.000-01"
+      color="blue"
       :dense="dense"
     />
 
@@ -31,6 +32,15 @@
       placeholder="000.000.000-01"
       :dense="dense"
     />
+    <q-row>
+      <q-col cols="auto">
+    <q-btn val="Entrar" unelevated  rounded  color="primary"  label="Entrar "  /> 
+      </q-col>
+      <q-col cols="auto">
+        <q-btn val="Sair" unelevated rounded color="secondary" label="Redefinir Senha"/>
+      </q-col>
+      </q-row> 
+    <br> 
   </div>
 </template>
 

@@ -47,3 +47,25 @@ json-server --watch db.json
 ```
 
 * Instalar as dependencias do projeto
+
+```bash
+
+#É necessario esta dentro da pasta do projeto para rodar o comando.
+
+npm install
+```
+* Rodar o projeto
+
+```bash
+
+#É necessario esta dentro da pasta do projeto para rodar o comando.
+
+npm run dev
+```
+
+
+## 🛠️ Construído com
+
+Mencione as ferramentas que você usou para criar seu projeto
+
+* [Quasar](https://quasar.dev/) - O framework web usado

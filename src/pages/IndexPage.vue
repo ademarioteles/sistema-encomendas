@@ -28,16 +28,13 @@
     <q-input
       filled
       v-model="ph"
-      label="CPF:"
+      label="PASSWORD:"
       placeholder="000.000.000-01"
       :dense="dense"
     />
     <q-row>
       <q-col cols="auto">
-    <q-btn val="Entrar" unelevated  rounded  color="primary"  label="Entrar "  /> 
-      </q-col>
-      <q-col cols="auto">
-        <q-btn val="Sair" unelevated rounded color="secondary" label="Redefinir Senha"/>
+        <q-btn val="Entrar" unelevated rounded color="secondary" label="Entrar"/>
       </q-col>
       </q-row> 
     <br> 
@@ -58,4 +55,5 @@ export default defineComponent({
     };
   },
 });
+
 </script>

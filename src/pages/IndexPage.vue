@@ -11,42 +11,41 @@
         :dense="dense"
       />
 
-      <q-radio
-        keep-color
-        v-model="tipoPessoa"
-        val="porsin"
-        label="Porteiro/Sindico"
-        color="teal"
-      />
-      <q-radio
-        keep-color
-        v-model="tipoPessoa"
-        val="inq"
-        label="Inquilino"
-        color="teal"
-      />
-      <q-input
-        filled
-        v-model="ph"
-        color="teal"
-        label="PASSWORD:"
-        placeholder="000.000.000-01"
-        :dense="dense"
-      />
-      <q-row>
-        <q-col cols="auto">
-          <q-btn
-            val="Entrar"
-            unelevated
-            rounded
-            color="black"
-            label="Entrar"
-            @click="buscarRadio()"
-          />
-        </q-col>
-      </q-row>
-      <br />
-    </div>
+    <q-radio
+      keep-color
+      v-model="color"
+      val="porsin"
+      label="Porteiro/Sindico"
+      color="teal"
+      @click="buscarRadio()"
+    />
+    <q-radio
+      keep-color
+      v-model="color"
+      val="inq"
+      label="Inquilino"
+      color="teal"
+      @click="buscarRadio()"
+    />
+    <q-input
+      filled
+      v-model="ph"
+      label="PASSWORD:"
+      placeholder="000.000.000-01"
+      :dense="dense"
+    />
+    <q-row>
+      <q-col cols="auto">
+        <q-btn
+          val="Entrar"
+          unelevated
+          rounded
+          color="secondary"
+          label="Entrar"
+        />
+      </q-col>
+    </q-row>
+    <br />
   </div>
 </template>
 

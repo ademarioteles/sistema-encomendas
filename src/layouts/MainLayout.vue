@@ -47,7 +47,7 @@ const linksList = [
     title: "Encomendas",
     caption: "quasar.dev",
     icon: "school",
-    link: "http://localhost:9000/#/encomendas",
+    link: "/encomendas",
   },
   {
     title: "Github",

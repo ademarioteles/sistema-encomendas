@@ -2,14 +2,19 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/indexPage.vue") }],
+    children: [
+      {
+        path: "",
+        component: () => import("pages/IndexPage.vue"),
+      },
+    ],
   },
   {
-    path: "/",
+    path: "/encomendas",
     component: () => import("layouts/EncomendasLayout.vue"),
     children: [
       {
-        path: "encomendas",
+        path: "",
         component: () => import("pages/EncomendasPage.vue"),
       },
     ],

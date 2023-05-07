@@ -34,10 +34,16 @@
     />
     <q-row>
       <q-col cols="auto">
-        <q-btn val="Entrar" unelevated rounded color="secondary" label="Entrar"/>
+        <q-btn
+          val="Entrar"
+          unelevated
+          rounded
+          color="secondary"
+          label="Entrar"
+        />
       </q-col>
-      </q-row> 
-    <br> 
+    </q-row>
+    <br />
   </div>
 </template>
 
@@ -50,10 +56,9 @@ export default defineComponent({
     return {
       color: ref("cyan"),
       buscarRadio(valor) {
-        alert();
+        alert("hello");
       },
     };
   },
 });
-
 </script>

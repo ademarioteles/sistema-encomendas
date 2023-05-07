@@ -2,16 +2,18 @@ const routes = [
   {
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
-    children: [{ path: "", component: () => import("pages/IndexPage.vue") }],
+    children: [{ path: "", component: () => import("pages/indexPage.vue") }],
   },
   {
-    path: "/encomendas",
-    component: () => import("layouts/MainLayout.vue"),
+    path: "/",
+    component: () => import("layouts/EncomendasLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/EncomendasPage.vue") },
+      {
+        path: "encomendas",
+        component: () => import("pages/EncomendasPage.vue"),
+      },
     ],
-  }, // Rota que sera usada para as encomendas
-
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

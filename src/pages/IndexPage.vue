@@ -2,14 +2,18 @@
   <div class="container bg-white">
     <div class="formulario">
       <h5 class="titulo">ACESSAR SISTEMA</h5>
-      <q-form @submit="onSubmit" action="/encomendas" method="POST">
+      <q-form @submit="onSubmit" aciton="" ref="formulario">
         <q-input
           filled
           v-model="cpf"
-          label="CPF:"
+          label="Cpf:"
           placeholder="000.000.000-01"
           color="teal"
-          :dense="dense"
+          :rules="[
+            (val) =>
+              (val && val.length > 0 && isCpf(val)) ||
+              'Digite o CPF corretamente',
+          ]"
         />
 
         <q-radio
@@ -18,7 +22,6 @@
           val="porsin"
           label="Porteiro/Sindico"
           color="teal"
-          @click="buscarRadio()"
         />
         <q-radio
           keep-color
@@ -26,21 +29,38 @@
           val="inq"
           label="Inquilino"
           color="teal"
-          @click="buscarRadio()"
         />
         <q-input
           filled
-          v-model="ph"
-          label="PASSWORD:"
+          chave="apartamento"
+          v-model="ap"
+          label="Apartamento:"
+          placeholder="404"
+          color="teal"
+          :rules="[
+            (val) => (val && val.length > 0) || 'Digite a senha corretamente',
+          ]"
+        />
+        <q-input
+          filled
+          class="chave"
+          v-model="ac"
+          label="Chave de Acesso:"
           placeholder="000.000.000-01"
-          :dense="dense"
+          color="teal"
+          :rules="[
+            (val) => (val && val.length > 0) || 'Digite a senha corretamente',
+          ]"
         />
         <br />
-        <q-row>
-          <q-col cols="auto">
-            <q-btn val="Entrar" type="submit" color="teal" label="Entrar" />
-          </q-col>
-        </q-row>
+
+        <q-btn
+          val="Entrar"
+          type="submit"
+          color="teal"
+          label="Entrar"
+          @click="enviarDados()"
+        />
       </q-form>
     </div>
   </div>
@@ -48,6 +68,7 @@
 
 <script>
 import { defineComponent, ref } from "vue";
+import { Notify } from "quasar";
 
 export default defineComponent({
   name: "IndexPage",
@@ -55,8 +76,25 @@ export default defineComponent({
     return {
       cpf: ref(""),
       tipoPessoa: ref(""),
-      buscarRadio() {
-        alert(this.cpf);
+      formulario: ref(""),
+      isCpf(cpf) {
+        //verificar se o cpf esta dentro dos padrões
+        const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+        return cpfReggex.test(cpf);
+      },
+      enviarDados() {
+        if (this.formulario) {
+          Notify.create({
+            type: "positive",
+            message: "Preencha corretamente os campos para prosseguir.",
+          });
+        } else if (this.tipoPessoa == "porsin") {
+        } else {
+          Notify.create({
+            type: "negative",
+            message: "Preencha corretamente os campos para prosseguir.",
+          });
+        }
       },
     };
   },

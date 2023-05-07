@@ -1,7 +1,7 @@
 <template>
   <div class="container bg-white">
-    <div class="bg-gray" style="max-width: 300px">
-      <h5><b>ACESSAR SISTEMA</b></h5>
+    <div style="width: 450px; text-align: center">
+      <h5><b style="color: teal">ACESSAR SISTEMA</b></h5>
       <q-input
         filled
         v-model="cpf"
@@ -11,41 +11,37 @@
         :dense="dense"
       />
 
-    <q-radio
-      keep-color
-      v-model="color"
-      val="porsin"
-      label="Porteiro/Sindico"
-      color="teal"
-      @click="buscarRadio()"
-    />
-    <q-radio
-      keep-color
-      v-model="color"
-      val="inq"
-      label="Inquilino"
-      color="teal"
-      @click="buscarRadio()"
-    />
-    <q-input
-      filled
-      v-model="ph"
-      label="PASSWORD:"
-      placeholder="000.000.000-01"
-      :dense="dense"
-    />
-    <q-row>
-      <q-col cols="auto">
-        <q-btn
-          val="Entrar"
-          unelevated
-          rounded
-          color="secondary"
-          label="Entrar"
-        />
-      </q-col>
-    </q-row>
-    <br />
+      <q-radio
+        keep-color
+        v-model="tipoPessoa"
+        val="porsin"
+        label="Porteiro/Sindico"
+        color="teal"
+        @click="buscarRadio()"
+      />
+      <q-radio
+        keep-color
+        v-model="tipoPessoa"
+        val="inq"
+        label="Inquilino"
+        color="teal"
+        @click="buscarRadio()"
+      />
+      <q-input
+        filled
+        v-model="ph"
+        label="PASSWORD:"
+        placeholder="000.000.000-01"
+        :dense="dense"
+      />
+      <br />
+      <q-row>
+        <q-col cols="auto">
+          <q-btn val="Entrar" color="teal" label="Entrar" />
+        </q-col>
+      </q-row>
+      <br />
+    </div>
   </div>
 </template>
 

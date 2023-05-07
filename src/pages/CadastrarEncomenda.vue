@@ -1,201 +1,84 @@
-<template class="container">
-  <div class="q-pa-md">
-    <div class="q-gutter-y-md column" style="max-width: 300px">
-      <q-toggle v-model="dense" label="Dense QField" />
+<template>
+  <div class="container q-pa-md">
 
-      <q-field :dense="dense">
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-      </q-field>
+    <q-form
+    @submit="onSubmit"
+      class="q-gutter-md"
+    >
+      <h1 style="font-size: 22px; font-weight: bolder;">Cadastramento de Encomendas</h1>
 
-      <q-field label="Label" stack-label :dense="dense">
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-      </q-field>
+      <q-input
+        filled
+        v-model="indentificacao"
+        label="Código do Item *"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Por favor digite algo o código']"
+      />
 
-      <q-field :dense="dense">
-        <template v-slot:prepend>
-          <q-icon name="event" />
-        </template>
+      <q-select
+        preenchido
+        v-model = " Apartamento "
+         label = " Apartamento"
+         :options = " numeroapartamento"
+        estilo = " largura : 250px "
+         comportamento = " menu "
+         :rules="[ val => val && val.length > 0 || 'Por favor selecione um apartamento']"
+       />
 
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-      </q-field>
+      <q-input
+        filled
+        v-model="Recebedor"
+        label="Recebedor *"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'Por favor digite algo quem é o recebedor']"
+      />
 
-      <q-field :dense="dense">
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
+      <q-input
+        filled
+        type="date"
+        v-model="datarecebimento"
+        label="Data do Recebimento *"
+        lazy-rules
+        :rules="[
+          val => val !== null && val !== '' || 'Por favor selecione a data' ]"
+      />
 
-        <template v-slot:append>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
-          </q-avatar>
-        </template>
-      </q-field>
+      <q-btn label="Cadastrar" type="submit" color="primary"/>
 
-      <q-field
-        :model-value="text"
-        bottom-slots
-        label="Label"
-        stack-label
-        counter
-        :dense="dense"
-      >
-        <template v-slot:prepend>
-          <q-icon name="place" />
-        </template>
+    </q-form>
 
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-
-        <template v-slot:append>
-          <q-icon name="close" class="cursor-pointer" />
-        </template>
-
-        <template v-slot:hint> Field hint </template>
-      </q-field>
-
-      <q-field
-        :model-value="text"
-        bottom-slots
-        label="Label"
-        stack-label
-        counter
-        maxlength="12"
-        :dense="dense"
-      >
-        <template v-slot:before>
-          <q-icon name="flight_takeoff" />
-        </template>
-
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-
-        <template v-slot:append>
-          <q-icon v-if="text !== ''" name="close" class="cursor-pointer" />
-          <q-icon name="search" />
-        </template>
-
-        <template v-slot:hint> Field hint </template>
-      </q-field>
-
-      <q-field
-        :model-value="text"
-        bottom-slots
-        label="Label"
-        stack-label
-        counter
-        maxlength="12"
-        :dense="dense"
-      >
-        <template v-slot:before>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
-          </q-avatar>
-        </template>
-
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-
-        <template v-slot:append>
-          <q-icon v-if="text !== ''" name="close" class="cursor-pointer" />
-          <q-icon name="schedule" />
-        </template>
-
-        <template v-slot:hint> Field hint </template>
-
-        <template v-slot:after>
-          <q-btn round dense flat icon="send" />
-        </template>
-      </q-field>
-
-      <q-field
-        :model-value="text"
-        bottom-slots
-        label="Label"
-        stack-label
-        counter
-        maxlength="12"
-        :dense="dense"
-      >
-        <template v-slot:before>
-          <q-icon name="event" />
-        </template>
-
-        <template v-slot:control>
-          <div class="self-center full-width no-outline" tabindex="0">
-            {{ text }}
-          </div>
-        </template>
-
-        <template v-slot:hint> Field hint </template>
-
-        <template v-slot:append>
-          <q-btn round dense flat icon="add" />
-        </template>
-      </q-field>
-
-      <q-field hint="Disable" :dense="dense" disable>
-        <template v-slot:control>
-          <div class="self-center full-width no-outline">{{ text }}</div>
-        </template>
-      </q-field>
-
-      <q-field hint="Readonly" :dense="dense" readonly>
-        <template v-slot:control>
-          <div class="self-center full-width no-outline">{{ text }}</div>
-        </template>
-      </q-field>
-
-      <q-field hint="Disable and readonly" :dense="dense" disable readonly>
-        <template v-slot:control>
-          <div class="self-center full-width no-outline">{{ text }}</div>
-        </template>
-      </q-field>
-    </div>
   </div>
 </template>
 
 <script>
+import useQuasar from 'quasar/src/composables/use-quasar.js';
 import { ref } from "vue";
+import { defineComponent } from "vue";
 
-export default {
-  setup() {
+export default defineComponent({
+  setup () {
+    const $q = useQuasar()
+
+    const indentificacao = ref(null)
+    const Apartamento = ref(null)
+    const Recebedor = ref(null)
+    const datarecebimento = ref(null)
+
+
+
     return {
-      text: ref("Field content"),
-      dense: ref(false),
-    };
+      indentificacao,
+      Apartamento,
+      Recebedor,
+      datarecebimento
+    }
   },
-};
+  onSubmit(){
+
+  },
+  numeroapartamento(){
+
+  }
+  });
 </script>
-<style>
-.container {
-  width: 100vw;
-  height: 80vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-</style>
+

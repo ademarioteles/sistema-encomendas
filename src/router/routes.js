@@ -19,6 +19,16 @@ const routes = [
       },
     ],
   },
+  {
+    path: "/Cadatrarencomenda",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("pages/CadastrarEncomenda.vue"),
+      },
+    ],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

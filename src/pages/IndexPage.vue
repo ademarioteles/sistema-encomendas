@@ -34,13 +34,7 @@
     />
     <q-row>
       <q-col cols="auto">
-        <q-btn
-          val="Entrar"
-          unelevated
-          rounded
-          color="secondary"
-          label="Entrar"
-        />
+        <q-btn color="secondary" label="Acessar" />
       </q-col>
     </q-row>
     <br />

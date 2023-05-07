@@ -52,7 +52,7 @@ const linksList = [
 
   {
     title: "Histórico",
-    caption: "",
+    caption: "quasar.dev",
     icon: "code",
     link: "/historico",
   },

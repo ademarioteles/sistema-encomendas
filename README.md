@@ -68,4 +68,9 @@ npm run dev
 
 Mencione as ferramentas que você usou para criar seu projeto
 
-* [Quasar](https://quasar.dev/) - O framework web usado
+* [Quasar](https://quasar.dev/) 
+* [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS )
+* [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML) 
+* [Visual Studio Code](https://code.visualstudio.com) 
+* [App.vue](https://vuejs.org)
+* [Git](https://docs.github.com/pt/account-and-profile)

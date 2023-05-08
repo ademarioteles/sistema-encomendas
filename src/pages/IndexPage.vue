@@ -22,6 +22,7 @@
           val="porsin"
           label="Porteiro/Sindico"
           color="teal"
+          @click="verificarOpcao()"
         />
         <q-radio
           keep-color
@@ -29,6 +30,7 @@
           val="inq"
           label="Inquilino"
           color="teal"
+          @click="verificarOpcao()"
         />
         <q-input
           filled
@@ -43,7 +45,7 @@
         />
         <q-input
           filled
-          class="chave"
+          class="numeroAcesso"
           v-model="ac"
           label="Chave de Acesso:"
           placeholder="000.000.000-01"
@@ -72,31 +74,43 @@ import { Notify } from "quasar";
 
 export default defineComponent({
   name: "IndexPage",
+
   setup() {
     return {
       cpf: ref(""),
       tipoPessoa: ref(""),
       formulario: ref(""),
-      isCpf(cpf) {
-        //verificar se o cpf esta dentro dos padrões
-        const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-        return cpfReggex.test(cpf);
-      },
-      enviarDados() {
-        if (this.formulario) {
-          Notify.create({
-            type: "positive",
-            message: "Preencha corretamente os campos para prosseguir.",
-          });
-        } else if (this.tipoPessoa == "porsin") {
-        } else {
-          Notify.create({
-            type: "negative",
-            message: "Preencha corretamente os campos para prosseguir.",
-          });
-        }
-      },
     };
+  },
+
+  methods: {
+    enviarDados() {
+      alert("hello");
+      if (this.formulario == "porsin") {
+      } else if (this.tipoPessoa == "porsin") {
+      } else {
+        Notify.create({
+          type: "negative",
+          message: "Preencha corretamente os campos para prosseguir.",
+        });
+      }
+    },
+    verificarOpcao() {
+      alert("hello");
+    },
+  },
+  isCpf(cpf) {
+    //verificar se o cpf esta dentro dos padrões
+    const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+    return cpfReggex.test(cpf);
   },
 });
 </script>
+<!-- 
+
+    Notify.create({
+            type: "positive",
+            message: "Preencha corretamente os campos para prosseguir.",
+          });
+
+-->

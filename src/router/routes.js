@@ -17,6 +17,10 @@ const routes = [
         path: "",
         component: () => import("pages/EncomendasPage.vue"),
       },
+      {
+        path: "historico",
+        component: () => import("pages/HistoricoPage.vue"),
+      },
     ],
   },
   // Always leave this as last one,

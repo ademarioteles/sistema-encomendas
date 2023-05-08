@@ -2,7 +2,7 @@
   <div class="container bg-white">
     <div class="formulario">
       <h5 class="titulo">ACESSAR SISTEMA</h5>
-      <q-form @submit="onSubmit" aciton="" ref="formulario">
+      <q-form @submit="onSubmit" aciton="">
         <q-input
           filled
           v-model="cpf"
@@ -18,6 +18,7 @@
 
         <q-radio
           keep-color
+          class="porteiro"
           v-model="tipoPessoa"
           val="porsin"
           label="Porteiro/Sindico"
@@ -25,6 +26,7 @@
           @click="verificarOpcao()"
         />
         <q-radio
+          class="inquilino"
           keep-color
           v-model="tipoPessoa"
           val="inq"
@@ -33,25 +35,29 @@
           @click="verificarOpcao()"
         />
         <q-input
+          v-if="isPorSin"
           filled
-          chave="apartamento"
-          v-model="ap"
-          label="Apartamento:"
-          placeholder="404"
+          v-model="ac"
+          label="Chave de Acesso:"
+          placeholder=""
           color="teal"
           :rules="[
-            (val) => (val && val.length > 0) || 'Digite a senha corretamente',
+            (val) =>
+              (val && val.length > 0 && isPorSin == true) ||
+              'Digite a senha corretamente',
           ]"
         />
         <q-input
+          v-if="isInq"
           filled
-          class="numeroAcesso"
           v-model="ac"
-          label="Chave de Acesso:"
-          placeholder="000.000.000-01"
+          label="Número do apartamento:"
+          placeholder="404"
           color="teal"
           :rules="[
-            (val) => (val && val.length > 0) || 'Digite a senha corretamente',
+            (val) =>
+              (val && val.length > 0 && isInq == true) ||
+              'Digite a senha corretamente',
           ]"
         />
         <br />
@@ -74,18 +80,23 @@ import { Notify } from "quasar";
 
 export default defineComponent({
   name: "IndexPage",
-
   setup() {
     return {
+      isInq: false,
+      isPorSin: false,
       cpf: ref(""),
-      tipoPessoa: ref(""),
-      formulario: ref(""),
+      tipoPessoa: ref(),
+      ac: ref(),
     };
   },
 
   methods: {
+    isCpf(cpf) {
+      //verificar se o cpf esta dentro dos padrões
+      const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+      return cpfReggex.test(cpf);
+    },
     enviarDados() {
-      alert("hello");
       if (this.formulario == "porsin") {
       } else if (this.tipoPessoa == "porsin") {
       } else {
@@ -96,13 +107,18 @@ export default defineComponent({
       }
     },
     verificarOpcao() {
-      alert("hello");
+      if (this.tipoPessoa == "porsin") {
+        //Verificar se o Radio Porteiro/Sindico foi selecionado
+        this.isPorSin = true;
+        this.isInq = false;
+        this.ac = ref("");
+      } else if (this.tipoPessoa == "inq") {
+        //Verificar se o Radio Inquilino foi selecionado
+        this.isPorSin = false;
+        this.isInq = true;
+        this.ac = ref("");
+      }
     },
-  },
-  isCpf(cpf) {
-    //verificar se o cpf esta dentro dos padrões
-    const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
-    return cpfReggex.test(cpf);
   },
 });
 </script>

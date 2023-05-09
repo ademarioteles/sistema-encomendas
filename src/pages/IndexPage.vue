@@ -39,12 +39,13 @@
           filled
           v-model="ac"
           label="Chave de Acesso:"
+          type="password"
           placeholder=""
           color="teal"
           :rules="[
             (val) =>
               (val && val.length > 0 && isPorSin == true) ||
-              'Digite a senha corretamente',
+              'Digite a chave de acesso corretamente',
           ]"
         />
         <q-input
@@ -57,7 +58,7 @@
           :rules="[
             (val) =>
               (val && val.length > 0 && isInq == true) ||
-              'Digite a senha corretamente',
+              'Digite o nº do apartamento corretamente',
           ]"
         />
         <br />
@@ -76,7 +77,6 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { Notify } from "quasar";
 
 export default defineComponent({
   name: "IndexPage",
@@ -96,16 +96,7 @@ export default defineComponent({
       const cpfReggex = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
       return cpfReggex.test(cpf);
     },
-    enviarDados() {
-      if (this.formulario == "porsin") {
-      } else if (this.tipoPessoa == "porsin") {
-      } else {
-        Notify.create({
-          type: "negative",
-          message: "Preencha corretamente os campos para prosseguir.",
-        });
-      }
-    },
+    enviarDados() {},
     verificarOpcao() {
       if (this.tipoPessoa == "porsin") {
         //Verificar se o Radio Porteiro/Sindico foi selecionado

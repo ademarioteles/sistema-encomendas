@@ -1,36 +1,40 @@
 <template>
-  <div class="tabela bg-white">
-    <form class="encomendas-form">
-      <h5 class="titulo">RASTREAMENTO</h5>
-      <div class="encomendas-list">
-        <q-list >
-          <q-item v-for="item in itens" :key="item.id" clickable @click="mostrarPopup(item)">
-            <q-item-section>
-              {{ item.texto }}
-              <span v-if="item.entregue" class="status-entregue">Entregue</span>
-              <span v-else class="status-pendente">Pendente</span>
-            </q-item-section>
-            <q-icon name="directions" size="30px"/>
-          </q-item>
-        </q-list>
-      </div>
-    </form>
-    <q-dialog v-model="popupAberto">
-      <q-card>
-        <q-card-section>
-          <div>
-            <p><strong>Identificador:</strong> {{ identificadorPopup.id }}</p>
-            <p><strong>Apartamento:</strong> {{ identificadorPopup.apartamento }}</p>
-            <p><strong>Recebedor:</strong> {{ identificadorPopup.recebedor }}</p>
-            <p><strong>Data de Recebimento:</strong> {{ identificadorPopup.dataRecebimento }}</p>
-          </div>
-        </q-card-section>
-        <q-card-actions align="right">
-          <q-btn label="Fechar" color="teal" @click="popupAberto = false"/>
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-  </div>
+    <div class="tabela bg-white">
+      <form class="encomendas-form">
+        <h5 class="titulo">RASTREAMENTO</h5>
+        <div class="encomendas-list">
+  
+          <q-list>
+            <q-item v-for="item in itens" :key="item.id" clickable class="item-encomenda" @click="mostrarPopup(item)">
+              <q-item-section>
+                {{ item.texto }}
+                <span v-if="item.entregue" class="status-entregue">Entregue</span>
+                <span v-else class="status-pendente">Pendente</span>
+              </q-item-section>
+              <q-item-section class="icon-section q-ml-md">
+                <q-icon name="check" class="icon-confirmar " size="35px" @click.stop="confirmarRecebimento(item)"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+          
+        </div>
+      </form>
+      <q-dialog v-model="popupAberto">
+        <q-card>
+          <q-card-section>
+            <div>
+              <p><strong>Identificador:</strong> {{ identificadorPopup.id }}</p>
+              <p><strong>Apartamento:</strong> {{ identificadorPopup.apartamento }}</p>
+              <p><strong>Recebedor:</strong> {{ identificadorPopup.recebedor }}</p>
+              <p><strong>Data de Recebimento:</strong> {{ identificadorPopup.dataRecebimento }}</p>
+            </div>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn label="Fechar" color="teal" @click="popupAberto = false"/>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+    </div>
 </template>
 
 <script>
@@ -57,7 +61,12 @@ export default defineComponent({
     mostrarPopup(id) {
       this.identificadorPopup = `Identificador ${id}`;
       this.popupAberto = true;
-    }
+    },
+    confirmarRecebimento(item) {
+  const confirmacao = confirm(`Você confirma o recebimento da encomenda ${item.texto}?`);
+  item.entregue = true;
+  item.dataRecebimento = new Date().toLocaleDateString();
+}
   }
 });
 </script>
@@ -73,7 +82,6 @@ export default defineComponent({
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
   text-align: center;
-  
 }
 .q-item {
   cursor: pointer;
@@ -106,6 +114,32 @@ export default defineComponent({
   margin-bottom: 1rem;
   display: center;
   align-items: center;
+}
+.item-encomenda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.item-encomenda .q-item-section:first-child {
+  flex: 1;
+}
+
+.item-encomenda .q-item-section:last-child {
+  flex: none;
+  margin-left: 8px;
+}
+
+.icon-section {
+
+  display: flex;
+  justify-content: center;
+
+}
+
+.icon-confirmar {
+  cursor: pointer;
 }
 
 </style>

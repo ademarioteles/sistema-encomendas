@@ -10,7 +10,7 @@
               <span v-if="item.entregue" class="status-entregue">Entregue</span>
               <span v-else class="status-pendente">Pendente</span>
             </q-item-section>
-            <q-icon name="directions" size="30px"/>
+            <q-icon name="directions" size="30px" />
           </q-item>
         </q-list>
       </div>
@@ -31,11 +31,11 @@ export default defineComponent({
         { id: 3, texto: "IDENTIFICADOR 3" },
         { id: 4, texto: "IDENTIFICADOR 4" },
         { id: 5, texto: "IDENTIFICADOR 5", entregue: true },
-        { id: 6, texto: "IDENTIFICADOR 6", entregue: true},
+        { id: 6, texto: "IDENTIFICADOR 6", entregue: true },
         { id: 7, texto: "IDENTIFICADOR 7", entregue: true },
         { id: 8, texto: "IDENTIFICADOR 8", entregue: true },
-        { id: 9, texto: "IDENTIFICADOR 9",entregue: true },
-        { id: 10, texto: "IDENTIFICADOR 10",entregue: true },
+        { id: 9, texto: "IDENTIFICADOR 9", entregue: true },
+        { id: 10, texto: "IDENTIFICADOR 10", entregue: true },
       ],
     };
   },
@@ -43,8 +43,6 @@ export default defineComponent({
 </script>
 
 <style>
-
-
 .titulo {
   font-size: 3rem;
   margin-bottom: 2rem;
@@ -61,7 +59,7 @@ export default defineComponent({
 }
 
 .q-item-section {
-  color: #26A69A;
+  color: #26a69a;
   flex: 2;
 }
 
@@ -82,7 +80,7 @@ export default defineComponent({
   border-radius: 4px;
   margin-left: 8px;
 }
-.tabela{
+.tabela {
   width: 100%;
   height: 40%;
   display: flex;

@@ -56,7 +56,6 @@ const linksList = [
     icon: "code",
     link: "/historico",
   },
-
 ];
 
 export default defineComponent({

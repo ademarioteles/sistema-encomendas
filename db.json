@@ -13,14 +13,44 @@
       "status": "Pendente"
     }
   ],
-  "inquilinos": [
+  "usuarios": [
     {
-      "cpf": "80256345636",
-      "apartamento": "502"
+      "nome": "Joãozinho",
+      "cpf": "000.000.000-32",
+      "tipoUsuario": "inquilino",
+      "codigoDeAcesso": "",
+      "apartamentos": [
+        [
+          "102B",
+          "103A",
+          "108B"
+        ]
+      ],
+      "id": 1
     },
     {
-      "cpf": "012345678936",
-      "apartamento": "812"
+      "nome": "Joãozinho",
+      "cpf": "000.000.000-31",
+      "tipoUsuario": "sindico",
+      "codigoDeAcesso": "010101",
+      "apartamentos": [
+        [
+          "102B",
+          "103A",
+          "108B"
+        ]
+      ],
+      "id": 2
+    },
+    {
+      "nome": "",
+      "cpf": "",
+      "tipoUsuario": "sindico",
+      "codigoDeAcesso": "",
+      "apartamentos": [
+        []
+      ],
+      "id": 3
     }
   ]
 }

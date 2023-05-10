@@ -102,33 +102,29 @@ export default defineComponent({
     },
     validarDados() {
       const usuarioEncontrado = this.usuario.find((u) => u.cpf === this.cpf);
-      if (!usuarioEncontrado) {
-        Notify.create({
-          type: "negative",
-          message: "Dados Invalidos.",
-        });
-        return;
-      }
-      if (this.isInq) {
-        const apartamentoEncontrado = this.usuario
-          .flatMap((u) => u.apartamentos)
-          .flat()
-          .find((a) => a === this.ac);
+      if (usuarioEncontrado) {
+        if (this.isInq) {
+          const apartamentoEncontrado = this.usuario
+            .flatMap((u) => u.apartamentos)
+            .flat()
+            .find((a) => a === this.ac);
 
-        if (apartamentoEncontrado) {
-          this.validData = true;
-          return;
-        }
-      } else if (this.isPorSin) {
-        if (usuarioEncontrado.codigoDeAcesso === this.ac) {
-          this.validData = true;
-          return;
+          if (apartamentoEncontrado) {
+            this.validData = true;
+            return;
+          }
+        } else if (this.isPorSin) {
+          if (usuarioEncontrado.codigoDeAcesso === this.ac) {
+            this.validData = true;
+            return;
+          }
         }
       }
       Notify.create({
         type: "negative",
         message: "Dados Invalidos.",
       });
+      return;
     },
     verificarOpcao() {
       if (this.tipoPessoa == "porsin") {

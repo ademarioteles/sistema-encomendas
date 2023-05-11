@@ -7,6 +7,7 @@
           filled
           v-model="cpf"
           label="Cpf:"
+          mask="###.###.###-##"
           placeholder="000.000.000-01"
           color="teal"
           :rules="[

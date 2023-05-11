@@ -1,83 +1,85 @@
 <template>
   <div class="container bg-white">
-  <div class="formulario">
-    <q-radio
-      keep-color
-      v-model="tipoUsuario"
-      val="sindico"
-      label="Porteiro/Sindico"
-      color="teal"
-    />
-    <q-radio
-      checked-icon
-      keep-color
-      v-model="tipoUsuario"
-      val="inquilino"
-      label="Inquilino"
-      color="teal"
-    />
-    <q-input
-      filled
-      v-model="nome"
-      label="NOME:"
-      placeholder="Nome Completo"
-      :dense="dense"
-    />
-    <q-input
-      filled
-      v-model="cpf"
-      label="CPF:"
-      placeholder="000.000.000-00"
-      :dense="dense"
-    />
-    <q-input
-      v-if="tipoUsuario === 'sindico'"
-      filled
-      v-model="codigoDeAcesso"
-      label="CHAVE DE ACESSO:"
-      placeholder="1234"
-      :dense="dense"
-    />
+    <div class="formulario">
+      <q-radio
+        keep-color
+        v-model="tipoUsuario"
+        val="sindico"
+        label="Porteiro/Sindico"
+        color="teal"
+      />
+      <q-radio
+        checked-icon
+        keep-color
+        v-model="tipoUsuario"
+        val="inquilino"
+        label="Inquilino"
+        color="teal"
+        @click="adicionarOpcao()"
+      />
+      <q-input
+        filled
+        v-model="nome"
+        label="NOME:"
+        placeholder="Nome Completo"
+        :dense="dense"
+      />
+      <q-input
+        filled
+        v-model="cpf"
+        label="CPF:"
+        placeholder="000.000.000-00"
+        mask="###.###.###-##"
+        :dense="dense"
+      />
+      <q-input
+        v-if="tipoUsuario === 'sindico'"
+        filled
+        v-model="codigoDeAcesso"
+        label="CHAVE DE ACESSO:"
+        placeholder="1234"
+        :dense="dense"
+      />
 
-    <q-btn
-      label="Adicionar apartamento"
-      color="primary"
-      @click="prompt = true"
-    />
-    <br />
-    <!-- dados para o dialog -->
-    <q-dialog v-model="prompt" persistent>
-      <q-card style="min-width: 350px">
-        <q-card-section>
-          <div class="text-h6">Numero do Apartamento</div>
-        </q-card-section>
+      <q-btn
+        label="Adicionar apartamento"
+        color="primary"
+        @click="prompt = true"
+      />
+      <br />
+      <!-- dados para o dialog -->
+      <q-dialog v-model="prompt" persistent>
+        <q-card style="min-width: 350px">
+          <q-card-section>
+            <div class="text-h6">Numero do Apartamento</div>
+          </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <q-input
-            dense
-            v-model="apartamento"
-            autofocus
-            @keyup.enter="prompt = false"
-          />
-        </q-card-section>
+          <q-card-section class="q-pt-none">
+            <q-input
+              dense
+              v-model="apartamento"
+              autofocus
+              @keyup.enter="prompt = false"
+            />
+          </q-card-section>
 
-        <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Cancelar" v-close-popup />
-          <q-btn
-            flat
-            label="Adicionar"
-            v-close-popup
-            @click="adicionarApartamento()"
-          />
-        </q-card-actions>
-      </q-card>
-    </q-dialog>
-    <ul>
-      <li v-for="ap in apartamentos" :key="ap.value">
+          <q-card-actions align="right" class="text-primary">
+            <q-btn flat label="Cancelar" v-close-popup />
+            <q-btn
+              flat
+              label="Adicionar"
+              v-close-popup
+              @click="adicionarApartamento()"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
+
+      <p v-for="ap in apartamentos" :key="ap.value">
         {{ ap }}
-      </li>
-    </ul>
-    <q-btn
+      </p>
+
+      <q-btn
         type="submit"
         :loading="submitting"
         label="Enviar"
@@ -89,7 +91,7 @@
           <q-spinner-facebook />
         </template>
       </q-btn>
-    <br />
+      <br />
     </div>
   </div>
 </template>

@@ -2,15 +2,17 @@
   "encomendas": [
     {
       "id": 1,
-      "nomeEncomenda": "Cadeira Gamer",
-      "dataEntrega": "12/05/2025",
-      "status": "Entregue"
+      "identificador": "Cadeira Gamer",
+      "dataRecebimento": "12/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "102B"
     },
     {
       "id": 2,
-      "nomeEncomenda": "Sofa",
-      "dataEntrega": "",
-      "status": "Pendente"
+      "identificador": "Mouse Gamer",
+      "dataRecebimento": "15/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "103B"
     }
   ],
   "usuarios": [

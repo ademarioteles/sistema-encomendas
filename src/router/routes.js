@@ -21,6 +21,7 @@ const routes = [
         path: "historico",
         component: () => import("pages/HistoricoPage.vue"),
       },
+      /*<<<<<<< HEAD*/
     ],
   },
   {
@@ -41,6 +42,8 @@ const routes = [
         path: "",
         component: () => import("pages/CadastrarEncomenda.vue"),
       },
+      /*=======
+>>>>>>> e34f25ecc5a0e43a2ee47f8363983d065d9d6092*/
     ],
   },
   // Always leave this as last one,

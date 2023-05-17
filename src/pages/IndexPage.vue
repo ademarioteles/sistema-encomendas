@@ -6,6 +6,7 @@
         <q-input
           filled
           v-model="cpf"
+          mask="###.###.###-##"
           label="Cpf:"
           placeholder="000.000.000-01"
           color="teal"
@@ -147,7 +148,10 @@ export default defineComponent({
           this.validarDados();
         })
         .catch((error) => {
-          console.log(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar na base.",
+          });
         });
     },
   },

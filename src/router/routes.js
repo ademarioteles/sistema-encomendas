@@ -46,16 +46,6 @@ const routes = [
 >>>>>>> e34f25ecc5a0e43a2ee47f8363983d065d9d6092*/
     ],
   },
-  {
-    path: "/",
-    component: () => import("layouts/CadastroUsuarioLayout.vue"),
-    children: [
-      {
-        path: "cadastrousuario",
-        component: () => import("pages/CadastroUsuarioPage.vue"),
-      },
-    ],
-  },
   // Always leave this as last one,
   // but you can also remove it
   {

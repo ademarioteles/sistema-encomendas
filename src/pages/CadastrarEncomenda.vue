@@ -10,7 +10,7 @@
       <q-input
         filled
         v-model="indentificacao"
-        label="Código do Item *"
+        label="Identificação do item *"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'Por favor digite algo o código']"
       />

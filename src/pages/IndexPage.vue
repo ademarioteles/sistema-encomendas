@@ -6,6 +6,7 @@
         <q-input
           filled
           v-model="cpf"
+          mask="###.###.###-##"
           label="Cpf:"
           placeholder="000.000.000-01"
           color="teal"
@@ -110,6 +111,9 @@ export default defineComponent({
             .find((a) => a === this.ac);
 
           if (apartamentoEncontrado) {
+            let b = { cpf: this.cpf, tipoUser: this.tipoPessoa };
+            b = JSON.stringify(b);
+            sessionStorage.setItem("usuario", b);
             this.validData = true;
             return;
           }
@@ -147,7 +151,10 @@ export default defineComponent({
           this.validarDados();
         })
         .catch((error) => {
-          console.log(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar na base.",
+          });
         });
     },
   },

@@ -21,6 +21,11 @@ const routes = [
         path: "historico",
         component: () => import("pages/HistoricoPage.vue"),
       },
+      {
+        path: "cadastrar",
+        component: () => import("pages/CadastrarEncomenda.vue"),
+      },
+      /*<<<<<<< HEAD*/
     ],
   },
   {
@@ -33,8 +38,6 @@ const routes = [
       },
     ],
   },
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

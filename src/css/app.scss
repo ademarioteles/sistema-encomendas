@@ -4,6 +4,32 @@ h1 {
 .container button {
   align-content: center;
 }
+.rastreamento {
+  border: 1px solid black;
+  text-align: center;
+}
+.status-entregue {
+  color: green;
+}
+.status-pendente {
+  color: black;
+}
+.cadastro {
+  width: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .cadastro {
+    width: 100vw;
+  }
+}
+.rastreamento:hover {
+  background-color: $secondary;
+}
 .container {
   width: 100vw;
   height: 80vh;

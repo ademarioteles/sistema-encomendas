@@ -22,7 +22,7 @@
 
     <q-drawer v-model="leftDrawerOpen">
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header> Opções</q-item-label>
 
         <EssentialLink
           v-for="link in essentialLinks"
@@ -32,7 +32,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container>
+    <q-page-container v-if="userExis != null">
       <router-view />
     </q-page-container>
   </q-layout>
@@ -41,7 +41,6 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
-
 const linksList = [
 {
     title: "Encomendas",
@@ -50,19 +49,24 @@ const linksList = [
     link: "/encomendas",
   },
   {
-    title: "Encomendas",
-    caption: "quasar.dev",
-    icon: "school",
-    link: "/encomendas",
+    title: "Cadastrar Usuario",
+    caption: "Página de cadastro de usuario",
+    icon: "people",
+    link: "/cadastrousuario",
+  },
+  {
+    title: "Cadastrar Encomendas",
+    caption: "Página de cadastro de encomendas",
+    icon: "store",
+    link: "/encomendas/cadastrar",
   },
 
   {
     title: "Histórico",
-    caption: "",
-    icon: "code",
-    link: "/historico",
+    caption: "Histórico das encomendas",
+    icon: "book",
+    link: "/encomendas/historico",
   },
-
 ];
 
 export default defineComponent({
@@ -74,14 +78,24 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false);
+    const userExist = JSON.parse(sessionStorage.getItem("usuario"));
 
     return {
       essentialLinks: linksList,
+      userExis: userExist,
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
     };
+  },
+  mounted() {
+    if (this.userExis != null) {
+    } else {
+      this.$router.push("/");
+      this.essentialLinks = null;
+      this.leftDrawerOpen = null;
+    }
   },
 });
 </script>

@@ -52,14 +52,14 @@ const linksList = [
     title: "Cadastrar Encomendas",
     caption: "Página de cadastro de encomendas",
     icon: "store",
-    link: "/cadastrousuario",
+    link: "/encomendas/cadastrar",
   },
 
   {
     title: "Histórico",
     caption: "Histórico das encomendas",
     icon: "book",
-    link: "encomendas/historico",
+    link: "/encomendas/historico",
   },
 ];
 

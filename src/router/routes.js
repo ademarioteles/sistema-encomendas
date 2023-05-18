@@ -21,6 +21,10 @@ const routes = [
         path: "historico",
         component: () => import("pages/HistoricoPage.vue"),
       },
+      {
+        path: "cadastrar",
+        component: () => import("pages/CadastrarEncomenda.vue"),
+      },
       /*<<<<<<< HEAD*/
     ],
   },
@@ -34,20 +38,6 @@ const routes = [
       },
     ],
   },
-  {
-    path: "/Cadatrarencomenda",
-    component: () => import("layouts/MainLayout.vue"),
-    children: [
-      {
-        path: "",
-        component: () => import("pages/CadastrarEncomenda.vue"),
-      },
-      /*=======
->>>>>>> e34f25ecc5a0e43a2ee47f8363983d065d9d6092*/
-    ],
-  },
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),

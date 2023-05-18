@@ -12,7 +12,35 @@
       "identificador": "Mouse Gamer",
       "dataRecebimento": "15/05/2025",
       "recebedor": "Joãozinho",
-      "apartamento": "103B"
+      "apartamento": "103A"
+    },
+    {
+      "id": 3,
+      "identificador": "Mesa",
+      "dataRecebimento": "12/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "108B"
+    },
+    {
+      "id": 4,
+      "identificador": "Notebook Dell",
+      "dataRecebimento": "15/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "105B"
+    },
+    {
+      "id": 5,
+      "identificador": "Celular",
+      "dataRecebimento": "15/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "105B"
+    },
+    {
+      "id": 6,
+      "identificador": "Ventilador",
+      "dataRecebimento": "15/05/2025",
+      "recebedor": "Joãozinho",
+      "apartamento": "105B"
     }
   ],
   "usuarios": [
@@ -23,9 +51,7 @@
       "codigoDeAcesso": "",
       "apartamentos": [
         [
-          "102B",
-          "103A",
-          "108B"
+          "102B"
         ]
       ],
       "id": 1
@@ -37,22 +63,46 @@
       "codigoDeAcesso": "010101",
       "apartamentos": [
         [
-          "102B",
-          "103A",
-          "108B"
+          "103A"
         ]
       ],
       "id": 2
     },
     {
-      "nome": "",
-      "cpf": "",
+      "nome": "Joãozinho",
+      "cpf": "000.000.000-33",
       "tipoUsuario": "sindico",
-      "codigoDeAcesso": "",
+      "codigoDeAcesso": "010101",
       "apartamentos": [
-        []
+        [
+          "108B"
+        ]
       ],
       "id": 3
+    },
+    {
+      "nome": "Pedrinho",
+      "cpf": "000.000.000-34",
+      "tipoUsuario": "sindico",
+      "codigoDeAcesso": "010101",
+      "apartamentos": [
+        [
+          "105B"
+        ]
+      ],
+      "id": 4
+    },
+    {
+      "nome": "asdasdasd",
+      "cpf": "000.000.000-37",
+      "tipoUsuario": "inquilino",
+      "codigoDeAcesso": "",
+      "apartamentos": [
+        [
+          "110B"
+        ]
+      ],
+      "id": 5
     }
   ]
 }

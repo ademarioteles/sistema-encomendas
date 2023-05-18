@@ -43,6 +43,12 @@ import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
 
 const linksList = [
+{
+    title: "Encomendas",
+    caption: "Página de Encomendas",
+    icon: "store",
+    link: "/encomendas",
+  },
   {
     title: "Encomendas",
     caption: "quasar.dev",

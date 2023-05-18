@@ -25,7 +25,7 @@ const routes = [
   },
   {
     path: "/",
-    component: () => import("layouts/CadastroUsuarioLayout.vue"),
+    component: () => import("layouts/EncomendasLayout.vue"),
     children: [
       {
         path: "cadastrousuario",

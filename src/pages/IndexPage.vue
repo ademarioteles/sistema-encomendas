@@ -111,6 +111,9 @@ export default defineComponent({
             .find((a) => a === this.ac);
 
           if (apartamentoEncontrado) {
+            let b = { cpf: this.cpf, tipoUser: this.tipoPessoa };
+            b = JSON.stringify(b);
+            sessionStorage.setItem("usuario", b);
             this.validData = true;
             return;
           }

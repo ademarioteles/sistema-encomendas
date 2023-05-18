@@ -4,6 +4,20 @@ h1 {
 .container button {
   align-content: center;
 }
+.rastreamento {
+  border: 1px solid black;
+  text-align: center;
+}
+.status-entregue {
+  color: green;
+}
+.status-pendente {
+  color: black;
+}
+
+.rastreamento:hover {
+  background-color: $secondary;
+}
 .container {
   width: 100vw;
   height: 80vh;

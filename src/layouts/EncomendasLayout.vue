@@ -79,16 +79,12 @@ export default defineComponent({
       userExis: userExist,
       leftDrawerOpen,
       toggleLeftDrawer() {
-        if (this.userExis != null) {
-        } else {
-          leftDrawerOpen.value = !leftDrawerOpen.value;
-        }
+        leftDrawerOpen.value = !leftDrawerOpen.value;
       },
     };
   },
   mounted() {
     if (this.userExis != null) {
-      this.essentialLinks = null;
     } else {
       this.$router.push("/");
       this.essentialLinks = null;

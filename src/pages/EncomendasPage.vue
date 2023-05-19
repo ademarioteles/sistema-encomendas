@@ -106,7 +106,7 @@ export default defineComponent({
     },
     async getEncomendas() {
       await api
-        .get("/encomendas")
+        .get(`/encomendas/`)
         .then((res) => {
           this.itens = res.data;
           this.listarEncomendas();

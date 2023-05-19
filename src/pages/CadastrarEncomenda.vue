@@ -8,17 +8,31 @@
       <q-input
         filled
         v-model="indentificacao"
-        label="Código do Item *"
+        label="Nome para Encomenda *"
         color="teal"
         lazy-rules
         :rules="[
-          (val) => (val && val.length > 0) || 'Por favor digite algo o código',
+          (val) =>
+            (val && val.length > 0) || 'Por favor digite o nome do objeto',
+        ]"
+      />
+
+      <q-input
+        filled
+        color="teal"
+        v-model="recebedor"
+        label="Nome do recebedor *"
+        lazy-rules
+        :rules="[
+          (val) =>
+            (val && val.length > 0) ||
+            'Por favor digite o responsavel pela encomenda',
         ]"
       />
 
       <q-select
         preenchido
-        v-model="Apartamento"
+        v-model="apartamento"
         label=" Apartamento"
         color="teal"
         :options="numeroapartamento"
@@ -32,23 +46,9 @@
 
       <q-input
         filled
-        color="teal"
-        v-model="Recebedor"
-        label="Cpf do recebedor *"
-        mask="###.###.###.##"
-        lazy-rules
-        :rules="[
-          (val) =>
-            (val && val.length > 0) ||
-            'Por favor digite algo quem é o recebedor',
-        ]"
-      />
-
-      <q-input
-        filled
         type="date"
         color="teal"
-        v-model="datarecebimento"
+        v-model="dataRecebimento"
         label="Data do Recebimento *"
         lazy-rules
         :rules="[
@@ -71,15 +71,15 @@ export default defineComponent({
     const $q = useQuasar();
 
     const indentificacao = ref(null);
-    const Apartamento = ref(null);
-    const Recebedor = ref(null);
-    const datarecebimento = ref(null);
+    const apartamento = ref(null);
+    const recebedor = ref(null);
+    const dataRecebimento = ref(null);
 
     return {
       indentificacao,
-      Apartamento,
-      Recebedor,
-      datarecebimento,
+      apartamento,
+      recebedor,
+      dataRecebimento,
     };
   },
   onSubmit() {},

@@ -41,8 +41,22 @@
 <script>
 import { defineComponent, ref } from "vue";
 import EssentialLink from "components/EssentialLink.vue";
-const linksList = [
-{
+const listInq = [
+  {
+    title: "Encomendas",
+    caption: "Página de Encomendas",
+    icon: "store",
+    link: "/encomendas",
+  },
+  {
+    title: "Histórico",
+    caption: "Histórico das encomendas",
+    icon: "book",
+    link: "/encomendas/historico",
+  },
+];
+const listPorsin = [
+  {
     title: "Encomendas",
     caption: "Página de Encomendas",
     icon: "store",
@@ -81,7 +95,7 @@ export default defineComponent({
     const userExist = JSON.parse(sessionStorage.getItem("usuario"));
 
     return {
-      essentialLinks: linksList,
+      essentialLinks: "",
       userExis: userExist,
       leftDrawerOpen,
       toggleLeftDrawer() {
@@ -91,10 +105,15 @@ export default defineComponent({
   },
   mounted() {
     if (this.userExis != null) {
+      if (this.userExis.tipoUser === "Porsin") {
+        this.essentialLinks = listPorsin;
+      } else {
+        this.essentialLinks = listInq;
+      }
     } else {
       this.$router.push("/");
       this.essentialLinks = null;
-      this.leftDrawerOpen = null;
+     this.leftDrawerOpen = null;
     }
   },
 });

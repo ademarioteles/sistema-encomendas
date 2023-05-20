@@ -111,7 +111,7 @@ export default defineComponent({
             .find((a) => a === this.ac);
 
           if (apartamentoEncontrado) {
-            let b = { cpf: this.cpf, tipoUser: this.tipoPessoa };
+            let b = { cpf: this.cpf, tipoUsuario: this.tipoPessoa, chaveAcesso: this.ac };
             b = JSON.stringify(b);
             sessionStorage.setItem("usuario", b);
             this.validData = true;
@@ -119,6 +119,9 @@ export default defineComponent({
           }
         } else if (this.isPorSin) {
           if (usuarioEncontrado.codigoDeAcesso === this.ac) {
+            let b = { cpf: this.cpf, tipoUsuario: this.tipoPessoa};
+            b = JSON.stringify(b);
+            sessionStorage.setItem("usuario", b);
             this.validData = true;
             return;
           }

@@ -23,7 +23,7 @@
               }}</span>
             </q-item-section>
             <q-item-section class="icon-section q-ml-md">
-              <div class="row">
+              <div class="row" v-if="tipoUsuario === 'porsin'">
                 <q-btn
                   color="teal"
                   v-if="!item.entregue"
@@ -77,6 +77,7 @@
 <script>
 import { defineComponent } from "vue";
 import api from "/api";
+const user = JSON.parse(sessionStorage.getItem("usuario"));
 
 export default defineComponent({
   name: "EncomendasPage",
@@ -85,6 +86,7 @@ export default defineComponent({
       itens: [{}],
       popupAberto: false,
       identificadorPopup: "",
+      tipoUsuario: user.tipoUsuario
     };
   },
   mounted() {
@@ -106,7 +108,7 @@ export default defineComponent({
     },
     async getEncomendas() {
       await api
-        .get(`/encomendas/`)
+        .get(`/encomendas/`, { params: { apartamento: user.chaveAcesso } })
         .then((res) => {
           this.itens = res.data;
           this.listarEncomendas();

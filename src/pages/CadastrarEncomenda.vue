@@ -1,13 +1,13 @@
 <template>
   <div class="cadastro q-pa-md">
-    <q-form @submit="onSubmit" class="q-gutter-md">
+    <q-form @submit="enviarEncomenda()" class="q-gutter-md">
       <h1 style="font-size: 22px; color: teal; font-weight: bolder">
         CADASTRO DE ENCOMENDAS
       </h1>
 
       <q-input
         filled
-        v-model="indentificacao"
+        v-model="indentificador"
         label="Nome para Encomenda *"
         color="teal"
         lazy-rules
@@ -31,11 +31,10 @@
       />
 
       <q-select
-        preenchido
         v-model="apartamento"
         label=" Apartamento"
         color="teal"
-        :options="numeroapartamento"
+        :options="listaApartamentos"
         estilo=" largura : 250px "
         comportamento=" menu "
         :rules="[
@@ -62,27 +61,67 @@
 </template>
 
 <script>
-import useQuasar from "quasar/src/composables/use-quasar.js";
+import { Notify } from "quasar";
 import { ref } from "vue";
 import { defineComponent } from "vue";
+import api from "/api";
 
 export default defineComponent({
   setup() {
-    const $q = useQuasar();
-
-    const indentificacao = ref(null);
-    const apartamento = ref(null);
-    const recebedor = ref(null);
-    const dataRecebimento = ref(null);
-
     return {
-      indentificacao,
-      apartamento,
-      recebedor,
-      dataRecebimento,
+      indentificador: ref(""),
+      apartamento: ref(""),
+      recebedor: ref(""),
+      dataRecebimento: ref(""),
+      listaApartamentos: [],
     };
   },
-  onSubmit() {},
-  numeroapartamento() {},
+  mounted() {
+    this.$nextTick(() => {
+      this.getApartamentos();
+    });
+  },
+  methods: {
+    enviarEncomenda() {
+      api
+        .post("/encomendas", {
+          identificador: this.identificador,
+          apartamento: this.apartamento,
+          recebedor: this.recebedor,
+          dataRecebimento: this.dataRecebimento,
+        })
+        .then(() => {
+          Notify.create({
+            type: "positive",
+            message: "Encomenda Cadastrada",
+          });
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+    async getApartamentos() {
+      await api
+        .get("/usuarios")
+        .then((res) => {
+          this.usuario = res.data;
+          this.validarDados();
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar na base.",
+          });
+        });
+    },
+    validarDados() {
+      const apartamentosEncontrados = this.usuario
+        .flatMap(
+          (apartamentosEncontrados) => apartamentosEncontrados.apartamentos
+        )
+        .flat();
+      this.listaApartamentos = apartamentosEncontrados;
+    },
+  },
 });
 </script>

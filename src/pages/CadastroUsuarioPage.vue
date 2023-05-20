@@ -141,7 +141,10 @@ export default defineComponent({
           apartamentos: [this.apartamentos],
         })
         .then(() => {
-          alert("Usuário cadastrado com sucesso");
+          Notify.create({
+            type: "positive",
+            message: "Encomenda Cadastrada",
+          });
         })
         .catch((error) => {
           alert(error);

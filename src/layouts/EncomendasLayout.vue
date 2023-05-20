@@ -105,7 +105,7 @@ export default defineComponent({
   },
   mounted() {
     if (this.userExis != null) {
-      if (this.userExis.tipoUser === "Porsin") {
+      if (this.userExis.tipoUsuario === "porsin") {
         this.essentialLinks = listPorsin;
       } else {
         this.essentialLinks = listInq;

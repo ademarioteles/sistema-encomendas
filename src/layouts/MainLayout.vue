@@ -24,7 +24,18 @@ export default defineComponent({
   components: {},
 
   setup() {
-    return {};
+    const userExist = JSON.parse(sessionStorage.getItem("usuario"));
+
+    return {
+      userExis: userExist,
+    };
+  },
+  mounted() {
+    if (this.userExis != null) {
+      this.$router.push("/encomendas");
+      this.essentialLinks = null;
+      this.leftDrawerOpen = null;
+    }
   },
 });
 </script>

@@ -34,7 +34,7 @@
         v-model="apartamento"
         label=" Apartamento"
         color="teal"
-        :options="listaApartamentos"
+        :options="this.listaApartamentos"
         estilo=" largura : 250px "
         comportamento=" menu "
         :rules="[
@@ -67,19 +67,19 @@ import { defineComponent } from "vue";
 import api from "/api";
 
 export default defineComponent({
+
   setup() {
     return {
       indentificador: ref(""),
       apartamento: ref(""),
       recebedor: ref(""),
       dataRecebimento: ref(""),
-      listaApartamentos: [],
+      usuario: {},
+      listaApartamentos: []
     };
   },
   mounted() {
-    this.$nextTick(() => {
-      this.getApartamentos();
-    });
+    this.getApartamentos();
   },
   methods: {
     enviarEncomenda() {
@@ -121,6 +121,7 @@ export default defineComponent({
         )
         .flat();
       this.listaApartamentos = apartamentosEncontrados;
+      console.log(this.listaApartamentos);
     },
   },
 });

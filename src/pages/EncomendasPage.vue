@@ -15,9 +15,12 @@
           >
             <q-item-section>
               <!--{{ item.texto }}-->
-              <span v-if="item.entregue" class="status-entregue">{{
-                item.identificador
-              }}</span>
+
+              <img src="../assets/box.png" style="width: 35px" />
+
+              <span v-if="item.entregue" class="status-entregue">
+                {{ item.identificador }}</span
+              >
               <span v-else class="status-pendente">{{
                 item.identificador
               }}</span>
@@ -129,7 +132,7 @@ export default defineComponent({
     },
     async getEncomendas() {
       await api
-        .get(`/encomendas/`, { params: { apartamento: user.chaveAcesso } })
+        .get(`/encomendas`, { params: { apartamento: user.chaveAcesso } })
         .then((res) => {
           this.itens = res.data;
           this.listarEncomendas();

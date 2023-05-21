@@ -120,14 +120,16 @@ export default defineComponent({
   },
   mounted() {
     if (this.userExis != null) {
-      if (this.userExis.tipoUsuario === "sindico") {
+      if (this.userExis.tipoUsuario == "sindico") {
         this.essentialLinks = listSind;
         this.template = true;
+        console.log("sindico");
       } else if (
-        this.userExis.tipoUsuario === "porteiro" &&
+        this.userExis.tipoUsuario == "porteiro" &&
         (this.$router.currentRoute.value.path != "/cadastrarusuario" ||
           this.$router.currentRoute.value.path != "/cadastrarusuario/")
       ) {
+        console.log(this.userExis.tipoUsuario);
         this.essentialLinks = listPort;
         this.template = true;
       } else if (

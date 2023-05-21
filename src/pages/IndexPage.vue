@@ -1,13 +1,14 @@
 <template>
-  <div class="container bg-white">
-    <div class="formulario">
-      <h5 class="titulo">ACESSAR SISTEMA</h5>
+  <div class="">
+    <div class="cadastro q-pa-md">
+      <h5 class="titulo">ACESSAR SISTEMA DE ENCOMENDAS</h5>
+      <img src="../assets/index.jpg" style="width: 40%; height: 5%" />
       <q-form @submit.prevent="onSubmit" action="/encomendas">
         <q-input
           filled
           v-model="cpf"
           mask="###.###.###-##"
-          label="Cpf:"
+          label="CPF:"
           placeholder="000.000.000-01"
           color="teal"
           :rules="[
@@ -17,33 +18,6 @@
           ]"
         />
 
-        <q-radio
-          keep-color
-          class="porteiro"
-          v-model="tipoPessoa"
-          val="porteiro"
-          label="Sindico"
-          color="teal"
-          @click="verificarOpcao()"
-        />
-        <q-radio
-          keep-color
-          class="porteiro"
-          v-model="tipoPessoa"
-          val="sindico"
-          label="Porteiro"
-          color="teal"
-          @click="verificarOpcao()"
-        />
-        <q-radio
-          class="inquilino"
-          keep-color
-          v-model="tipoPessoa"
-          val="inquilino"
-          label="Inquilino"
-          color="teal"
-          @click="verificarOpcao()"
-        />
         <q-input
           v-if="isPorSin"
           filled
@@ -71,9 +45,39 @@
               'Digite o nº do apartamento corretamente',
           ]"
         />
-        <br />
 
-        <q-btn val="Entrar" type="submit" color="teal" label="Entrar" />
+        <q-radio
+          keep-color
+          v-model="tipoPessoa"
+          val="sindico"
+          label="Sindico"
+          color="teal"
+          @click="verificarOpcao()"
+        />
+        <q-radio
+          keep-color
+          v-model="tipoPessoa"
+          val="porteiro"
+          label="Porteiro"
+          color="teal"
+          @click="verificarOpcao()"
+        />
+        <q-radio
+          keep-color
+          v-model="tipoPessoa"
+          val="inquilino"
+          label="Inquilino"
+          color="teal"
+          @click="verificarOpcao()"
+        />
+        <br />
+        <q-btn
+          class="full-width"
+          val="Entrar"
+          type="submit"
+          color="teal"
+          label="Entrar"
+        />
       </q-form>
     </div>
   </div>
@@ -88,10 +92,10 @@ export default defineComponent({
   name: "IndexPage",
   setup() {
     return {
-      isInq: false,
+      isInq: true,
       isPorSin: false,
       cpf: ref(""),
-      tipoPessoa: ref(),
+      tipoPessoa: ref("inquilino"),
       ac: ref(),
       usuario: {},
       validData: false,

@@ -5,8 +5,11 @@ h1 {
   align-content: center;
 }
 .rastreamento {
-  border: 1px solid black;
   text-align: center;
+  border: 1px solid;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 .status-entregue {
   color: green;
@@ -27,9 +30,7 @@ h1 {
     width: 100vw;
   }
 }
-.rastreamento:hover {
-  background-color: $secondary;
-}
+
 .container {
   width: 100vw;
   height: 80vh;

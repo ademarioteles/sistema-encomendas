@@ -31,12 +31,11 @@
       />
 
       <q-select
-        v-model="apartamento"
         label=" Apartamento"
         color="teal"
-        :options="this.listaApartamentos"
+        v-model="apartamento"
+        :options="listaApartamentos"
         estilo=" largura : 250px "
-        comportamento=" menu "
         :rules="[
           (val) =>
             (val && val.length > 0) || 'Por favor selecione um apartamento',
@@ -67,15 +66,14 @@ import { defineComponent } from "vue";
 import api from "/api";
 
 export default defineComponent({
-
-  setup() {
+  data() {
     return {
       indentificador: ref(""),
-      apartamento: ref(""),
+      apartamento: ref(null),
       recebedor: ref(""),
       dataRecebimento: ref(""),
       usuario: {},
-      listaApartamentos: []
+      listaApartamentos: [],
     };
   },
   mounted() {
@@ -121,7 +119,6 @@ export default defineComponent({
         )
         .flat();
       this.listaApartamentos = apartamentosEncontrados;
-      console.log(this.listaApartamentos);
     },
   },
 });

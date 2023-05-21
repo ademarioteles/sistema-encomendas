@@ -5,7 +5,7 @@
         RASTREAMENTO DE ENCOMENDAS
       </h5>
       <div class="encomendas-list">
-        <q-list>
+        <q-list color="amber">
           <q-item
             v-for="item in itens"
             :key="item.id"
@@ -14,7 +14,7 @@
             @click="mostrarPopup(item)"
           >
             <q-item-section>
-              {{ item.texto }}
+              <!--{{ item.texto }}-->
               <span v-if="item.entregue" class="status-entregue">{{
                 item.identificador
               }}</span>
@@ -22,25 +22,46 @@
                 item.identificador
               }}</span>
             </q-item-section>
-            <q-item-section class="icon-section q-ml-md">
-              <div class="row" v-if="tipoUsuario === 'porsin'">
-                <q-btn
-                  color="teal"
-                  v-if="!item.entregue"
-                  @click.stop="confirmarRecebimento(item)"
-                >
-                  <q-icon left size="3em" name="check" />
-                  <div>Recebido</div>
-                </q-btn>
-                <q-btn color="blue" @click.stop="confirmarRecebimento(item)">
-                  <q-icon left size="3em" name="edit" />
-                  <div>Editar</div>
-                </q-btn>
-                <q-btn color="red" @click.stop="confirmarRecebimento(item)">
-                  <q-icon left size="3em" name="remove" />
-                  <div>Excluir</div>
-                </q-btn>
-              </div>
+            <q-item-section
+              v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+            >
+              <q-btn
+                rounded=""
+                flat
+                v-if="!item.entregue"
+                color="teal"
+                icon="check"
+                label="Recebido"
+                @click.stop="confirmarRecebimento(item)"
+              />
+            </q-item-section>
+            <q-item-section
+              v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+            >
+              <q-btn
+                v-if="!item.entregue"
+                rounded=""
+                flat
+                color="blue"
+                icon="edit"
+                name="edit"
+                label="Editar"
+                @click.stop="confirmarRecebimento(item)"
+              />
+            </q-item-section>
+            <q-item-section
+              v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+            >
+              <q-btn
+                v-if="!item.entregue"
+                rounded=""
+                flat
+                color="red"
+                icon="remove"
+                name="remove"
+                label="Remover"
+                @click.stop="confirmarRecebimento(item)"
+              />
             </q-item-section>
           </q-item>
         </q-list>
@@ -86,7 +107,7 @@ export default defineComponent({
       itens: [{}],
       popupAberto: false,
       identificadorPopup: "",
-      tipoUsuario: user.tipoUsuario
+      tipoUsuario: user.tipoUsuario,
     };
   },
   mounted() {

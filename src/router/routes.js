@@ -18,10 +18,6 @@ const routes = [
         component: () => import("pages/EncomendasPage.vue"),
       },
       {
-        path: "historico",
-        component: () => import("pages/HistoricoPage.vue"),
-      },
-      {
         path: "cadastrar",
         component: () => import("pages/CadastrarEncomenda.vue"),
       },

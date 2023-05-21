@@ -16,7 +16,15 @@
           Management
         </q-toolbar-title>
 
-        <div></div>
+        <div>
+          <q-btn
+            color="black"
+            round
+            icon="directions"
+            @click="sair()"
+            label="Sair"
+          />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -48,14 +56,8 @@ const listInq = [
     icon: "store",
     link: "/encomendas",
   },
-  {
-    title: "Histórico",
-    caption: "Histórico das encomendas",
-    icon: "book",
-    link: "/encomendas/historico",
-  },
 ];
-const listPorsin = [
+const listSind = [
   {
     title: "Encomendas",
     caption: "Página de Encomendas",
@@ -74,15 +76,21 @@ const listPorsin = [
     icon: "store",
     link: "/encomendas/cadastrar",
   },
-
+];
+const listPort = [
   {
-    title: "Histórico",
-    caption: "Histórico das encomendas",
-    icon: "book",
-    link: "/encomendas/historico",
+    title: "Encomendas",
+    caption: "Página de Encomendas",
+    icon: "store",
+    link: "/encomendas",
+  },
+  {
+    title: "Cadastrar Encomendas",
+    caption: "Página de cadastro de encomendas",
+    icon: "store",
+    link: "/encomendas/cadastrar",
   },
 ];
-
 export default defineComponent({
   name: "MainLayout",
 
@@ -103,17 +111,25 @@ export default defineComponent({
       },
     };
   },
+  methods: {
+    sair() {
+      sessionStorage.removeItem("usuario");
+      this.$router.push("/");
+    },
+  },
   mounted() {
     if (this.userExis != null) {
-      if (this.userExis.tipoUsuario === "porsin") {
-        this.essentialLinks = listPorsin;
-      } else {
+      if (this.userExis.tipoUsuario === "sindico") {
+        this.essentialLinks = listSind;
+      } else if (this.userExis.tipoUsuario === "porteiro") {
+        this.essentialLinks = listPort;
+      } else if (this.userExis.tipoUsuario === "inquilino") {
         this.essentialLinks = listInq;
       }
     } else {
       this.$router.push("/");
       this.essentialLinks = null;
-     this.leftDrawerOpen = null;
+      this.leftDrawerOpen = null;
     }
   },
 });

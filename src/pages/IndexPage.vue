@@ -21,8 +21,17 @@
           keep-color
           class="porteiro"
           v-model="tipoPessoa"
-          val="porsin"
-          label="Porteiro/Sindico"
+          val="porteiro"
+          label="Sindico"
+          color="teal"
+          @click="verificarOpcao()"
+        />
+        <q-radio
+          keep-color
+          class="porteiro"
+          v-model="tipoPessoa"
+          val="sindico"
+          label="Porteiro"
           color="teal"
           @click="verificarOpcao()"
         />
@@ -30,7 +39,7 @@
           class="inquilino"
           keep-color
           v-model="tipoPessoa"
-          val="inq"
+          val="inquilino"
           label="Inquilino"
           color="teal"
           @click="verificarOpcao()"
@@ -111,7 +120,11 @@ export default defineComponent({
             .find((a) => a === this.ac);
 
           if (apartamentoEncontrado) {
-            let b = { cpf: this.cpf, tipoUsuario: this.tipoPessoa, chaveAcesso: this.ac };
+            let b = {
+              cpf: this.cpf,
+              tipoUsuario: this.tipoPessoa,
+              chaveAcesso: this.ac,
+            };
             b = JSON.stringify(b);
             sessionStorage.setItem("usuario", b);
             this.validData = true;
@@ -119,7 +132,7 @@ export default defineComponent({
           }
         } else if (this.isPorSin) {
           if (usuarioEncontrado.codigoDeAcesso === this.ac) {
-            let b = { cpf: this.cpf, tipoUsuario: this.tipoPessoa};
+            let b = { cpf: this.cpf, tipoUsuario: this.tipoPessoa };
             b = JSON.stringify(b);
             sessionStorage.setItem("usuario", b);
             this.validData = true;
@@ -134,12 +147,17 @@ export default defineComponent({
       return;
     },
     verificarOpcao() {
-      if (this.tipoPessoa == "porsin") {
+      if (this.tipoPessoa == "sindico") {
         //Verificar se o Radio Porteiro/Sindico foi selecionado
         this.isPorSin = true;
         this.isInq = false;
         this.ac = ref("");
-      } else if (this.tipoPessoa == "inq") {
+      } else if (this.tipoPessoa == "porteiro") {
+        //Verificar se o Radio Inquilino foi selecionado
+        this.isPorSin = true;
+        this.isInq = false;
+        this.ac = ref("");
+      } else if (this.tipoPessoa == "inquilino") {
         //Verificar se o Radio Inquilino foi selecionado
         this.isPorSin = false;
         this.isInq = true;

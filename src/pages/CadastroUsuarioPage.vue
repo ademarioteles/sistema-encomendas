@@ -9,8 +9,17 @@
           keep-color
           v-model="tipoUsuario"
           val="sindico"
-          label="Porteiro/Sindico"
+          label="Sindico"
           color="teal"
+          @click="deixarNulo()"
+        />
+        <q-radio
+          keep-color
+          v-model="tipoUsuario"
+          val="porteiro"
+          label="Porteiro"
+          color="teal"
+          @click="deixarNulo()"
         />
         <q-radio
           checked-icon
@@ -19,6 +28,7 @@
           val="inquilino"
           label="Inquilino"
           color="teal"
+          @click="deixarNulo()"
         />
         <q-input
           filled
@@ -42,7 +52,7 @@
           ]"
         />
         <q-input
-          v-if="tipoUsuario === 'sindico'"
+          v-if="tipoUsuario === 'sindico' || tipoUsuario === 'porteiro'"
           filled
           v-model="codigoDeAcesso"
           label="CHAVE DE ACESSO:"
@@ -54,13 +64,18 @@
         />
 
         <q-btn
+          v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
           label="Adicionar apartamento"
           color="primary"
           @click="prompt = true"
         />
         <br />
         <!-- dados para o dialog -->
-        <q-dialog v-model="prompt" persistent>
+        <q-dialog
+          v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
+          v-model="prompt"
+          persistent
+        >
           <q-card style="min-width: 350px">
             <q-card-section>
               <div class="text-h6">Numero do Apartamento</div>
@@ -111,7 +126,7 @@
 <script>
 import api from "/api";
 import { defineComponent, ref } from "vue";
-
+import { Notify } from "quasar";
 export default defineComponent({
   name: "CadastroUsuarioPage",
 
@@ -131,6 +146,12 @@ export default defineComponent({
     };
   },
   methods: {
+    deixarNulo() {
+      this.cpf = ref("");
+      this.nome = ref("");
+      this.codigoDeAcesso = ref("");
+      this.apartamentos = ref([]);
+    },
     enviarUsuario() {
       api
         .post("/usuarios", {

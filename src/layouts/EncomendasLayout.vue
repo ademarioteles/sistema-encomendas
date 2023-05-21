@@ -1,4 +1,4 @@
-<template>
+<template v-if="template">
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar class="bg-black">
@@ -105,6 +105,7 @@ export default defineComponent({
     return {
       essentialLinks: "",
       userExis: userExist,
+      template: ref(),
       leftDrawerOpen,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -121,10 +122,24 @@ export default defineComponent({
     if (this.userExis != null) {
       if (this.userExis.tipoUsuario === "sindico") {
         this.essentialLinks = listSind;
-      } else if (this.userExis.tipoUsuario === "porteiro") {
+        this.template = true;
+      } else if (
+        this.userExis.tipoUsuario === "porteiro" &&
+        (this.$router.currentRoute.value.path != "/cadastrarusuario" ||
+          this.$router.currentRoute.value.path != "/cadastrarusuario/")
+      ) {
         this.essentialLinks = listPort;
-      } else if (this.userExis.tipoUsuario === "inquilino") {
+        this.template = true;
+      } else if (
+        this.userExis.tipoUsuario == "inquilino" &&
+        (this.$router.currentRoute.value.path == "/encomendas/" ||
+          this.$router.currentRoute.value.path == "/encomendas")
+      ) {
+        this.template = true;
         this.essentialLinks = listInq;
+      } else {
+        this.$router.push("/encomendas/");
+        this.template = true;
       }
     } else {
       this.$router.push("/");

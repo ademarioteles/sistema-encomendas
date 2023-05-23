@@ -7,7 +7,7 @@
 
       <q-input
         filled
-        v-model="indentificador"
+        v-model="identificador"
         label="Nome para Encomenda *"
         color="teal"
         lazy-rules
@@ -68,7 +68,7 @@ import api from "/api";
 export default defineComponent({
   data() {
     return {
-      indentificador: ref(""),
+      identificador: ref(""),
       apartamento: ref(null),
       recebedor: ref(""),
       dataRecebimento: ref(""),

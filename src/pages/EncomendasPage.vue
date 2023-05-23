@@ -86,7 +86,7 @@
             </p>
             <p>
               <strong>Data de Recebimento:</strong>
-              {{ identificadorPopup.dataRecebimento }}
+              {{ dataRecebimento }}
             </p>
           </div>
         </q-card-section>
@@ -111,16 +111,18 @@ export default defineComponent({
       popupAberto: false,
       identificadorPopup: "",
       tipoUsuario: user.tipoUsuario,
+      dataRecebimento: "",
     };
   },
   mounted() {
     this.getEncomendas();
   },
   methods: {
-    async listarEncomendas() {},
     mostrarPopup(id) {
-      this.identificadorPopup = id;
 
+
+      this.identificadorPopup = id;
+      this.formatData();
       this.popupAberto = true;
     },
     confirmarRecebimento(item) {
@@ -135,11 +137,22 @@ export default defineComponent({
         .get(`/encomendas`, { params: { apartamento: user.chaveAcesso } })
         .then((res) => {
           this.itens = res.data;
-          this.listarEncomendas();
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    async formatData() {
+
+      this.dataRecebimento = this.identificadorPopup.dataRecebimento;
+      this.dataRecebimento = this.dataRecebimento
+        .split("-")
+      this.dataRecebimento =
+        this.dataRecebimento[2] +
+        "/" +
+        this.dataRecebimento[1] +
+        "/" +
+        this.dataRecebimento[0];
     },
   },
 });

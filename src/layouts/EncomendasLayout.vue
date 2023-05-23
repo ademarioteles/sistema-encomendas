@@ -123,7 +123,6 @@ export default defineComponent({
       if (this.userExis.tipoUsuario == "sindico") {
         this.essentialLinks = listSind;
         this.template = true;
-        console.log("sindico");
       } else if (
         this.userExis.tipoUsuario == "porteiro" &&
         (this.$router.currentRoute.value.path != "/cadastrarusuario" ||

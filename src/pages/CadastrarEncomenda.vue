@@ -1,5 +1,8 @@
 <template>
-  <div class="cadastro q-pa-md">
+  <div
+    class="cadastro q-pa-md"
+    v-if="userExis == 'sindico' || userExis == 'porteiro'"
+  >
     <q-form @submit="enviarEncomenda()" class="q-gutter-md">
       <h1 style="font-size: 22px; color: teal; font-weight: bolder">
         CADASTRO DE ENCOMENDAS
@@ -67,8 +70,10 @@ import api from "/api";
 
 export default defineComponent({
   data() {
+    const userExist = JSON.parse(sessionStorage.getItem("usuario"));
     return {
       identificador: ref(""),
+      userExis: userExist.tipoUsuario,
       apartamento: ref(null),
       recebedor: ref(""),
       dataRecebimento: ref(""),

@@ -115,7 +115,9 @@ export default defineComponent({
       return cpfReggex.test(cpf);
     },
     validarDados() {
-      const usuarioEncontrado = this.usuario.find((u) => u.cpf === this.cpf);
+      const usuarioEncontrado = this.usuario.find(
+        (u) => u.cpf === this.cpf && u.tipoUsuario == this.tipoPessoa
+      );
       if (usuarioEncontrado) {
         if (this.isInq) {
           const apartamentoEncontrado = this.usuario

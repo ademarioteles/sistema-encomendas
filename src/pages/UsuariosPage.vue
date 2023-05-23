@@ -63,10 +63,16 @@
             </p>
             <p>
               <strong>Apartamentos:</strong>
-              {{ identificadorPopup.apartamentos }}
             </p>
+            <p
+              v-for="index in identificadorPopup.apartamentos.length"
+              :key="index"
+            >
+              {{ identificadorPopup.apartamentos[index - 1] }}
+            </p>
+
             <p>
-              <strong>Tipo de Usuario:</strong>
+              <strong>Tipo:</strong>
               {{ identificadorPopup.tipoUsuario }}
             </p>
           </div>

@@ -1,22 +1,13 @@
 {
   "encomendas": [
     {
-      "id": 1,
-      "identificador": "Cadeira Gamer",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
+      "identificador": "Bicicleta",
       "apartamento": "102B",
-      "coletado": false,
-      "dataColeta": "1998-03-19"
-    },
-    {
-      "id": 2,
-      "identificador": "Mouse Gamer",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
-      "apartamento": "103A",
-      "coletado": false,
-      "dataColeta": "1998-03-19"
+      "recebedor": "ademario",
+      "dataRecebimento": "23/05/2023",
+      "dataEntrega": null,
+      "coletado": true,
+      "id": 1
     }
   ],
   "usuarios": [

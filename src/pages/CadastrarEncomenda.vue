@@ -50,6 +50,7 @@
         type="date"
         color="teal"
         v-model="dataRecebimento"
+        mask="##/##/####"
         label="Data do Recebimento *"
         lazy-rules
         :rules="[
@@ -62,7 +63,7 @@
 </template>
 
 <script>
-import { Notify } from "quasar";
+import { Notify, date } from "quasar";
 import { ref } from "vue";
 import { defineComponent } from "vue";
 import api from "/api";
@@ -90,8 +91,9 @@ export default defineComponent({
           identificador: this.identificador,
           apartamento: this.apartamento,
           recebedor: this.recebedor,
-          dataRecebimento: this.dataRecebimento,
-          coletado: false
+          dataRecebimento: date.formatDate(this.dataRecebimento, "DD/MM/YYYY"),
+          dataEntrega: null,
+          coletado: false,
         })
         .then(() => {
           Notify.create({
@@ -122,6 +124,7 @@ export default defineComponent({
         .flatMap(
           (apartamentosEncontrados) => apartamentosEncontrados.apartamentos
         )
+        .filter((apartamentosEncontrados) => apartamentosEncontrados != "")
         .flat();
       this.listaApartamentos = apartamentosEncontrados;
     },

@@ -11,7 +11,7 @@
             :key="item.id"
             clickable
             class="rastreamento"
-            @click="mostrarPopup(item)"
+            @click="mostrarPopupEncomenda(item)"
           >
             <q-item-section>
               <!--{{ item.texto }}-->
@@ -31,18 +31,16 @@
               <q-btn
                 rounded=""
                 flat
-                v-if="!item.entregue"
                 color="teal"
                 icon="check"
-                label="Recebido"
-                @click.stop="confirmarRecebimento(item)"
+                label="Coletado"
+                @click.stop="mostrarPopupColeta(item)"
               />
             </q-item-section>
             <q-item-section
               v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
             >
               <q-btn
-                v-if="!item.entregue"
                 rounded=""
                 flat
                 color="blue"
@@ -56,21 +54,20 @@
               v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
             >
               <q-btn
-                v-if="!item.entregue"
                 rounded=""
                 flat
                 color="red"
                 icon="remove"
                 name="remove"
                 label="Remover"
-                @click.stop="confirmarRecebimento(item)"
+                @click="mostrarPopupRemover(item)"
               />
             </q-item-section>
           </q-item>
         </q-list>
       </div>
     </form>
-    <q-dialog v-model="popupAberto">
+    <q-dialog v-model="popupEncomendasAberto">
       <q-card>
         <q-card-section>
           <div>
@@ -91,7 +88,66 @@
           </div>
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn label="Fechar" color="teal" @click="popupAberto = false" />
+          <q-btn
+            label="Fechar"
+            color="teal"
+            v-close-popup
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <!-- dados para o dialog coletado -->
+    <q-dialog
+      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
+      v-model="popupColetaAberto"
+      persistent
+    >
+      <q-card style="min-width: 350px">
+        <q-form @submit="confirmarColeta()">
+          <q-input
+            filled
+            color="teal"
+            v-model="Coletor"
+            label="Nome do Coletor"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val && val.length > 0) ||
+                'Por favor digite o nome de quem coletou a encomenda',
+            ]"
+          />
+          <q-input
+            filled
+            type="date"
+            color="teal"
+            v-model="dataColeta"
+            label="Data da Coleta"
+            lazy-rules
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') || 'Por favor selecione a data',
+            ]"
+          />
+          <q-card-actions align="right" class="text-primary">
+            <q-btn flat label="Cancelar" v-close-popup />
+            <q-btn flat label="Confirmar" type="submit" />
+          </q-card-actions>
+        </q-form>
+      </q-card>
+    </q-dialog>
+    <!-- dados para o dialog remover -->
+    <q-dialog
+      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
+      v-model="popupRemoverAberto"
+      persistent
+    >
+      <q-card style="min-width: 350px">
+        <q-card-section>
+              <div class="text-h6">Gostaria de apagar a encomenda {{ identificadorPopup.identificador }}?</div>
+            </q-card-section>
+        <q-card-actions align="right" class="text-primary">
+          <q-btn flat label="Cancelar" v-close-popup />
+          <q-btn flat label="Confirmar" @click="apagarEncomenda()" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -99,8 +155,9 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import api from "/api";
+import { Notify } from "quasar";
 const user = JSON.parse(sessionStorage.getItem("usuario"));
 
 export default defineComponent({
@@ -108,33 +165,71 @@ export default defineComponent({
   data() {
     return {
       itens: [{}],
-      popupAberto: false,
-      identificadorPopup: "",
+      popupEncomendasAberto: ref(false),
+      identificadorPopup: ref(""),
       tipoUsuario: user.tipoUsuario,
-      dataRecebimento: "",
+      dataRecebimento: ref(""),
+      dataColeta: ref(""),
+      Coletor: ref(""),
+      popupColetaAberto: ref(false),
+      popupRemoverAberto: ref(false),
     };
   },
   mounted() {
     this.getEncomendas();
   },
   methods: {
-    mostrarPopup(id) {
-
-
+    mostrarPopupRemover(item) {
+      this.identificadorPopup = item;
+      this.popupRemoverAberto = true;
+    },
+    mostrarPopupEncomenda(id) {
       this.identificadorPopup = id;
       this.formatData();
-      this.popupAberto = true;
+      this.popupEncomendasAberto = true;
     },
-    confirmarRecebimento(item) {
-      const confirmacao = confirm(
-        `Você confirma o recebimento da encomenda ${item.texto}?`
-      );
-      item.entregue = true;
-      item.dataRecebimento = new Date().toLocaleDateString();
+    mostrarPopupColeta(item) {
+      this.identificadorPopup = item;
+      this.popupColetaAberto = true;
+    },
+    async apagarEncomenda() {
+      await api
+        .delete(`/encomendas/${this.identificadorPopup.id}`, {})
+        .then(() => {
+          Notify.create({
+            type: "positive",
+            message: "Encomenda Apagada!",
+          });
+          this.getEncomendas()
+          this.popupRemoverAberto = false
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+    async confirmarColeta() {
+      await api
+        .patch(`/encomendas/${this.identificadorPopup.id}`, {
+          coletado: true,
+          dataColeta: this.dataColeta,
+        })
+        .then(() => {
+          Notify.create({
+            type: "positive",
+            message: "Coleta Confirmada!",
+          });
+          this.getEncomendas();
+          this.popupColetaAberto = false;
+        })
+        .catch((error) => {
+          alert(error);
+        });
     },
     async getEncomendas() {
       await api
-        .get(`/encomendas`, { params: { apartamento: user.chaveAcesso } })
+        .get(`/encomendas`, {
+          params: { apartamento: user.chaveAcesso, coletado: false },
+        })
         .then((res) => {
           this.itens = res.data;
         })
@@ -143,10 +238,8 @@ export default defineComponent({
         });
     },
     async formatData() {
-
       this.dataRecebimento = this.identificadorPopup.dataRecebimento;
-      this.dataRecebimento = this.dataRecebimento
-        .split("-")
+      this.dataRecebimento = this.dataRecebimento.split("-");
       this.dataRecebimento =
         this.dataRecebimento[2] +
         "/" +

@@ -56,7 +56,6 @@
           (val) => (val !== null && val !== '') || 'Por favor selecione a data',
         ]"
       />
-
       <q-btn label="Cadastrar" color="teal" type="submit" />
     </q-form>
   </div>
@@ -92,6 +91,7 @@ export default defineComponent({
           apartamento: this.apartamento,
           recebedor: this.recebedor,
           dataRecebimento: this.dataRecebimento,
+          coletado: false
         })
         .then(() => {
           Notify.create({

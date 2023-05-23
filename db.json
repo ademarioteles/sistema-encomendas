@@ -5,56 +5,18 @@
       "identificador": "Cadeira Gamer",
       "dataRecebimento": "1998-03-18",
       "recebedor": "Joãozinho",
-      "apartamento": "102B"
+      "apartamento": "102B",
+      "coletado": false,
+      "dataColeta": "1998-03-19"
     },
     {
       "id": 2,
       "identificador": "Mouse Gamer",
       "dataRecebimento": "1998-03-18",
       "recebedor": "Joãozinho",
-      "apartamento": "103A"
-    },
-    {
-      "id": 3,
-      "identificador": "Mesa",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
-      "apartamento": "108B"
-    },
-    {
-      "id": 4,
-      "identificador": "Notebook Dell",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
-      "apartamento": "105B"
-    },
-    {
-      "id": 5,
-      "identificador": "Celular",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
-      "apartamento": "105B"
-    },
-    {
-      "id": 6,
-      "identificador": "Ventilador",
-      "dataRecebimento": "1998-03-18",
-      "recebedor": "Joãozinho",
-      "apartamento": "105B"
-    },
-    {
-      "identificador": "asdasd",
-      "apartamento": "102B",
-      "recebedor": "asdasd",
-      "dataRecebimento": "1998-03-19",
-      "id": 7
-    },
-    {
-      "identificador": "asdasd",
       "apartamento": "103A",
-      "recebedor": "asdasd",
-      "dataRecebimento": "1998-03-18",
-      "id": 8
+      "coletado": false,
+      "dataColeta": "1998-03-19"
     }
   ],
   "usuarios": [
@@ -63,7 +25,11 @@
       "cpf": "000.000.000-31",
       "tipoUsuario": "inquilino",
       "codigoDeAcesso": "",
-      "apartamentos": ["102B", "103B", "103A"],
+      "apartamentos": [
+        "102B",
+        "103B",
+        "103A"
+      ],
       "id": 1
     },
     {
@@ -71,7 +37,9 @@
       "cpf": "000.000.000-32",
       "tipoUsuario": "sindico",
       "codigoDeAcesso": "010101",
-      "apartamentos": ["102A"],
+      "apartamentos": [
+        "102A"
+      ],
       "id": 2
     },
     {
@@ -79,7 +47,9 @@
       "cpf": "000.000.000-33",
       "tipoUsuario": "porteiro",
       "codigoDeAcesso": "010101",
-      "apartamentos": [""],
+      "apartamentos": [
+        ""
+      ],
       "id": 3
     }
   ]

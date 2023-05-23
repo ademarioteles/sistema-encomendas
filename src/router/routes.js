@@ -25,12 +25,16 @@ const routes = [
     ],
   },
   {
-    path: "/",
+    path: "/usuarios",
     component: () => import("layouts/EncomendasLayout.vue"),
     children: [
       {
-        path: "cadastrousuario",
+        path: "cadastrar",
         component: () => import("pages/CadastroUsuarioPage.vue"),
+      },
+      {
+        path: "",
+        component: () => import("pages/UsuariosPage.vue"),
       },
     ],
   },

@@ -7,6 +7,7 @@
         </h5>
         <q-radio
           keep-color
+          v-if="userExis == 'sindico'"
           v-model="tipoUsuario"
           val="sindico"
           label="Sindico"
@@ -15,6 +16,7 @@
         />
         <q-radio
           keep-color
+          v-if="userExis == 'sindico'"
           v-model="tipoUsuario"
           val="porteiro"
           label="Porteiro"
@@ -52,7 +54,7 @@
           ]"
         />
         <q-input
-          v-if="tipoUsuario === 'sindico' || tipoUsuario === 'porteiro'"
+          v-if="tipoUsuario === 'sindico'"
           filled
           v-model="codigoDeAcesso"
           label="CHAVE DE ACESSO:"
@@ -127,30 +129,34 @@
 import api from "/api";
 import { defineComponent, ref } from "vue";
 import { Notify } from "quasar";
+
 export default defineComponent({
   name: "CadastroUsuarioPage",
 
   setup() {
+    const userExist = JSON.parse(sessionStorage.getItem("usuario"));
+
     return {
       tipoUsuario: ref("inquilino"),
+      userExis: userExist.tipoUsuario,
       nome: ref(""),
       cpf: ref(""),
       codigoDeAcesso: ref(""),
       prompt: ref(false),
       apartamento: ref(""),
-      apartamentos: ref([]),
-      adicionarApartamento() {
-        this.apartamentos.push(this.apartamento);
-        this.apartamento = "";
-      },
+      apartamentos: [],
     };
   },
   methods: {
+    adicionarApartamento() {
+      this.apartamentos.push(this.apartamento);
+      this.apartamento = "";
+    },
     deixarNulo() {
       this.cpf = ref("");
       this.nome = ref("");
       this.codigoDeAcesso = ref("");
-      this.apartamentos = ref([]);
+      this.apartamentos = [];
     },
     enviarUsuario() {
       api
@@ -159,12 +165,12 @@ export default defineComponent({
           cpf: this.cpf,
           tipoUsuario: this.tipoUsuario,
           codigoDeAcesso: this.codigoDeAcesso,
-          apartamentos: [this.apartamentos],
+          apartamentos: this.apartamentos,
         })
         .then(() => {
           Notify.create({
             type: "positive",
-            message: "Encomenda Cadastrada",
+            message: "Usuário Cadastrado",
           });
         })
         .catch((error) => {

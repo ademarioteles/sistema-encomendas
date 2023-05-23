@@ -57,7 +57,7 @@ const listInq = [
     link: "/encomendas",
   },
 ];
-const listSind = [
+const listSindPor = [
   {
     title: "Encomendas",
     caption: "Página de Encomendas",
@@ -68,7 +68,13 @@ const listSind = [
     title: "Cadastrar Usuario",
     caption: "Página de cadastro de usuario",
     icon: "people",
-    link: "/cadastrousuario",
+    link: "/usuarios/cadastrar",
+  },
+  {
+    title: "Usuarios",
+    caption: "Página de usuarios",
+    icon: "people",
+    link: "/usuarios",
   },
   {
     title: "Cadastrar Encomendas",
@@ -120,25 +126,12 @@ export default defineComponent({
   },
   mounted() {
     if (this.userExis != null) {
-      if (this.userExis.tipoUsuario == "sindico") {
-        this.essentialLinks = listSind;
-        this.template = true;
-        console.log("sindico");
-      } else if (
-        this.userExis.tipoUsuario == "porteiro" &&
-        (this.$router.currentRoute.value.path != "/cadastrarusuario" ||
-          this.$router.currentRoute.value.path != "/cadastrarusuario/")
+      if (
+        this.userExis.tipoUsuario == "sindico" ||
+        this.userExis.tipoUsuario == "porteiro"
       ) {
-        console.log(this.userExis.tipoUsuario);
-        this.essentialLinks = listPort;
+        this.essentialLinks = listSindPor;
         this.template = true;
-      } else if (
-        this.userExis.tipoUsuario == "inquilino" &&
-        (this.$router.currentRoute.value.path == "/encomendas/" ||
-          this.$router.currentRoute.value.path == "/encomendas")
-      ) {
-        this.template = true;
-        this.essentialLinks = listInq;
       } else {
         this.$router.push("/encomendas/");
         this.template = true;

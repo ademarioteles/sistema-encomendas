@@ -11,7 +11,7 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title class="preconnect">
           <img class="q-mr-sm" src="./../assets/apartments.png" />Condominium
           Management
         </q-toolbar-title>
@@ -61,25 +61,25 @@ const listSindPor = [
   {
     title: "Encomendas",
     caption: "Página de Encomendas",
-    icon: "store",
+    icon: "local_shipping",
     link: "/encomendas",
   },
   {
     title: "Cadastrar Usuario",
     caption: "Página de cadastro de usuario",
-    icon: "people",
+    icon: "person_add",
     link: "/usuarios/cadastrar",
   },
   {
     title: "Usuarios",
     caption: "Página de usuarios",
-    icon: "people",
+    icon: "supervised_user_circle",
     link: "/usuarios",
   },
   {
     title: "Cadastrar Encomendas",
     caption: "Página de cadastro de encomendas",
-    icon: "store",
+    icon: "add_shopping_cart",
     link: "/encomendas/cadastrar",
   },
 ];

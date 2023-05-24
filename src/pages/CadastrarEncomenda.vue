@@ -93,7 +93,7 @@ export default defineComponent({
           recebedor: this.recebedor,
           dataRecebimento: date.formatDate(this.dataRecebimento, "DD/MM/YYYY"),
           dataEntrega: null,
-          coletado: false,
+          entregue: false,
         })
         .then(() => {
           Notify.create({

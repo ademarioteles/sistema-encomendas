@@ -1,38 +1,25 @@
 {
   "encomendas": [
     {
-      "identificador": "Bicicleta",
-      "apartamento": "102B",
-      "recebedor": "ademario",
-      "dataRecebimento": "23/05/2023",
+      "identificador": "brinquedos",
+      "apartamento": "102A",
+      "recebedor": "joazinho",
+      "dataRecebimento": "03/05/2023",
+      "dataEntrega": "29/05/2023",
+      "entregue": true,
+      "id": 2
+    },
+    {
+      "identificador": "skate",
+      "apartamento": "103A",
+      "recebedor": "fernando",
+      "dataRecebimento": "17/05/2023",
       "dataEntrega": null,
-      "coletado": true,
-      "id": 1
+      "entregue": false,
+      "id": 3
     }
   ],
   "usuarios": [
-    {
-      "nome": "Joãozinho",
-      "cpf": "000.000.000-31",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [
-        "102B",
-        "103B",
-        "103A"
-      ],
-      "id": 1
-    },
-    {
-      "nome": "Joana",
-      "cpf": "000.000.000-32",
-      "tipoUsuario": "sindico",
-      "codigoDeAcesso": "010101",
-      "apartamentos": [
-        "102A"
-      ],
-      "id": 2
-    },
     {
       "nome": "Mendonça",
       "cpf": "000.000.000-33",
@@ -41,7 +28,28 @@
       "apartamentos": [
         ""
       ],
+      "id": 1
+    },
+    {
+      "nome": "Muller",
+      "cpf": "000.000.000-34",
+      "tipoUsuario": "sindico",
+      "codigoDeAcesso": "010101",
+      "apartamentos": [
+        "102B",
+        "103C"
+      ],
       "id": 3
+    },
+    {
+      "nome": "FELIX",
+      "cpf": "000.000.000-22",
+      "tipoUsuario": "porteiro",
+      "codigoDeAcesso": "",
+      "apartamentos": [
+        "102C,105D"
+      ],
+      "id": 4
     }
   ]
 }

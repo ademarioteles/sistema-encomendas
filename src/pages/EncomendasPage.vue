@@ -37,16 +37,9 @@
                       <q-item-section @click="mostrarPopupEncomenda(item)">
                         <!--{{ item.texto }}-->
 
-                        <span
-                          v-if="item.entregue"
-                          @click="mostrarPopupEncomenda(item)"
-                          class="status-entregue"
-                        >
+                        <span @click="mostrarPopupEncomenda(item)">
                           {{ item.identificador }}</span
                         >
-                        <span v-else class="status-pendente">{{
-                          item.identificador
-                        }}</span>
                       </q-item-section>
                       <q-item-section
                         v-if="
@@ -107,24 +100,17 @@
                 <div class="encomendas-list">
                   <q-list color="amber">
                     <q-item
-                      v-for="item in itensEntregue"
-                      :key="item.id"
+                      v-for="entregue in itensEntregue"
+                      :key="entregue.id"
                       clickable
                       class="rastreamento"
                     >
-                      <q-item-section @click="mostrarPopupEncomenda(item)">
+                      <q-item-section @click="mostrarPopupEncomenda(entregue)">
                         <!--{{ item.texto }}-->
 
-                        <span
-                          v-if="item.entregue"
-                          @click="mostrarPopupEncomenda(item)"
-                          class="status-entregue"
+                        <span @click="mostrarPopupEncomenda(entregue)">
+                          {{ entregue.identificador }}</span
                         >
-                          {{ item.identificador }}</span
-                        >
-                        <span v-else class="status-pendente">{{
-                          item.identificador
-                        }}</span>
                       </q-item-section>
                       <q-item-section
                         v-if="
@@ -144,7 +130,7 @@
                           icon="edit"
                           name="edit"
                           label="Editar"
-                          @click.stop="mostrarEditEncomenda(item)"
+                          @click.stop="mostrarEditEncomenda(entregue)"
                         />
                       </q-item-section>
                       <q-item-section
@@ -159,7 +145,7 @@
                           icon="remove"
                           name="remove"
                           label="Remover"
-                          @click="mostrarPopupRemover(item)"
+                          @click="mostrarPopupRemover(entregue)"
                         />
                       </q-item-section>
                     </q-item>
@@ -192,7 +178,11 @@
             </p>
             <p>
               <strong>Data de Recebimento:</strong>
-              <q-input color="teal" v-model="dataRecebimento"></q-input>
+              <q-input
+                color="teal"
+                mask="##/##/####"
+                v-model="dataRecebimento"
+              ></q-input>
             </p>
           </div>
         </q-card-section>
@@ -200,8 +190,9 @@
           <q-btn label="Cancelar" color="red" v-close-popup />
           <q-btn
             label="Confirmar"
+            v-close-popup
             color="teal"
-            @click="mostrarEditEncomenda(item.id)"
+            @click="editEncomenda()"
           />
         </q-card-actions>
       </q-card>
@@ -230,7 +221,7 @@
     </q-dialog>
     <!-- dados para o dialog coletado -->
     <q-dialog
-      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
+      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
       v-model="popupColetaAberto"
       persistent
     >
@@ -272,7 +263,7 @@
     </q-dialog>
     <!-- dados para o dialog remover -->
     <q-dialog
-      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
+      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
       v-model="popupRemoverAberto"
       persistent
     >
@@ -285,7 +276,12 @@
         </q-card-section>
         <q-card-actions align="right" class="text-primary">
           <q-btn color="red" label="Cancelar" v-close-popup />
-          <q-btn color="teal" label="Confirmar" @click="apagarEncomenda()" />
+          <q-btn
+            color="teal"
+            label="Confirmar"
+            v-close-popup
+            @click="apagarEncomenda()"
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -303,7 +299,6 @@ export default defineComponent({
   data() {
     return {
       itens: [{}],
-
       itensEntregue: [{}],
       popupEncomendasAberto: ref(false),
       popupEditEncomendasAberto: ref(false),
@@ -340,13 +335,16 @@ export default defineComponent({
           this.getEncomendas();
         })
         .catch((error) => {
-          alert(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao editar.",
+          });
         });
     },
     carregarDadosPop() {
       this.dataRecebimento = this.identificadorPopup.dataRecebimento;
-      this.receborSelecionado = this.identificadorPopup.apartamento;
-      this.apartamentoSelecionado = this.identificadorPopup.recebedor;
+      this.receborSelecionado = this.identificadorPopup.recebedor;
+      this.apartamentoSelecionado = this.identificadorPopup.apartamento;
       this.identificadorSelecionado = this.identificadorPopup.identificador;
     },
 
@@ -380,7 +378,10 @@ export default defineComponent({
           this.popupRemoverAberto = false;
         })
         .catch((error) => {
-          alert(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao apagar.",
+          });
         });
     },
     async confirmarEntrega() {
@@ -395,43 +396,44 @@ export default defineComponent({
             message: "Entrega Confirmada!",
           });
           this.getEncomendas();
+          this.tab = "recebidos";
           this.popupColetaAberto = false;
         })
         .catch((error) => {
-          alert(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao confirmar encomenda.",
+          });
         });
     },
     async getEncomendas() {
       await api
         .get(`/encomendas`, {
-          params: { apartamento: user.chaveAcesso, entrega: false },
+          params: { entregue: false },
         })
         .then((res) => {
           this.itens = res.data;
         })
         .catch((error) => {
-          console.log(error);
+          Notify.create({
+            type: "positive",
+            message: "Erro ao consultar encomenda.",
+          });
         });
 
       await api
         .get(`/encomendas`, {
-          params: { apartamento: user.chaveAcesso, entrega: true },
+          params: { entregue: true },
         })
         .then((res) => {
           this.itensEntregue = res.data;
         })
         .catch((error) => {
-          console.log(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar encomenda.",
+          });
         });
-    },
-    formatData() {
-      this.dataRecebimento = this.dataRecebimento.split("-");
-      this.dataRecebimento =
-        this.dataRecebimento[2] +
-        "/" +
-        this.dataRecebimento[1] +
-        "/" +
-        this.dataRecebimento[0];
     },
   },
 });

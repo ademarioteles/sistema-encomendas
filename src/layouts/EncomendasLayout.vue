@@ -61,42 +61,29 @@ const listSindPor = [
   {
     title: "Encomendas",
     caption: "Página de Encomendas",
-    icon: "store",
+    icon: "local_shipping",
     link: "/encomendas",
   },
   {
-    title: "Cadastrar Usuario",
-    caption: "Página de cadastro de usuario",
-    icon: "people",
-    link: "/usuarios/cadastrar",
+    title: "Cadastrar Encomendas",
+    caption: "Página de cadastro de encomendas",
+    icon: "add_shopping_cart",
+    link: "/encomendas/cadastrar",
   },
   {
     title: "Usuarios",
     caption: "Página de usuarios",
-    icon: "people",
+    icon: "supervised_user_circle",
     link: "/usuarios",
   },
   {
-    title: "Cadastrar Encomendas",
-    caption: "Página de cadastro de encomendas",
-    icon: "store",
-    link: "/encomendas/cadastrar",
+    title: "Cadastrar Usuario",
+    caption: "Página de cadastro de usuario",
+    icon: "person_add",
+    link: "/usuarios/cadastrar",
   },
 ];
-const listPort = [
-  {
-    title: "Encomendas",
-    caption: "Página de Encomendas",
-    icon: "store",
-    link: "/encomendas",
-  },
-  {
-    title: "Cadastrar Encomendas",
-    caption: "Página de cadastro de encomendas",
-    icon: "store",
-    link: "/encomendas/cadastrar",
-  },
-];
+
 export default defineComponent({
   name: "MainLayout",
 

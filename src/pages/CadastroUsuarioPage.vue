@@ -64,50 +64,41 @@
           :dense="dense"
           :rules="[(val) => (val && val.length > 2) || 'Digite uma chave']"
         />
-
-        <q-btn
-          v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
-          label="Adicionar apartamento"
-          color="primary"
-          @click="prompt = true"
-        />
-        <br />
         <!-- dados para o dialog -->
-        <q-dialog
-          v-if="tipoUsuario == 'sindico' || tipoUsuario == 'inquilino'"
-          v-model="prompt"
-          persistent
+        <q-input
+          label="APARTAMENTO"
+          v-model="apartamento"
+          stack-label
+          counter
+          maxlength="4"
+          :dense="dense"
+          v-if="tipoUsuario != 'porteiro'"
         >
-          <q-card style="min-width: 350px">
-            <q-card-section>
-              <div class="text-h6">Numero do Apartamento</div>
-            </q-card-section>
+          <template #append>
+            <q-btn
+              round
+              dense
+              flat
+              icon="add"
+              @click="adicionarApartamento"
+              :disable="apartamento.trim() === ''"
+            />
+          </template>
+        </q-input>
 
-            <q-card-section class="q-pt-none">
-              <q-input
-                dense
-                v-model="apartamento"
-                autofocus
-                @keyup.enter="prompt = false"
-              />
-            </q-card-section>
-
-            <q-card-actions align="right" class="text-primary">
-              <q-btn flat label="Cancelar" v-close-popup />
-              <q-btn
-                flat
-                label="Adicionar"
-                v-close-popup
-                @click="adicionarApartamento()"
-              />
-            </q-card-actions>
-          </q-card>
-        </q-dialog>
         <ul>
           <p v-for="ap in apartamentos" :key="ap.value">
             {{ ap }}
+            <q-btn
+              outline
+              color="primary"
+              icon="remove"
+              name="remove"
+              label="Remover"
+            />
           </p>
         </ul>
+
         <q-btn
           type="submit"
           :loading="submitting"

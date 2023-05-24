@@ -1,84 +1,281 @@
 <template>
   <div class="">
-    <form>
-      <h5 class="titulo" style="text-align: center">LISTA DE USUÁRIOS</h5>
-      <div class="encomendas-list">
-        <q-list color="amber">
-          <q-item
-            v-for="item in itens"
-            :key="item.id"
-            clickable
-            class="rastreamento"
-            @click="mostrarPopup(item)"
+    <h5 class="titulo" style="text-align: center">LISTA DE USUÁRIOS</h5>
+
+    <div class="q-px-md">
+      <div class="" style="">
+        <q-card style="min-width: 350px">
+          <q-tabs
+            v-model="tab"
+            dense
+            class="bg-black text-white"
+            active-color="teal"
+            indicator-color="teal"
+            align="justify"
           >
-            <q-item-section>
-              <!--{{ item.texto }}-->
+            <q-tab name="sindico" label="SINDICOS" />
+            <q-tab name="porteiro" label="PORTEIROS" />
+            <q-tab name="inquilino" label="INQUILINOS" />
+          </q-tabs>
 
-              <span>{{ item.nome }}</span>
-            </q-item-section>
+          <q-tab-panels v-model="tab" animated class="bg-white text-black">
+            <q-tab-panel name="sindico">
+              <div class="text-h6 row">
+                <img src="../assets/business-man.jpg" style="width: 45px" />
+                SINDICOS
+              </div>
+              <form>
+                <div class="Usuarios-list">
+                  <q-list color="amber">
+                    <q-item
+                      v-for="sindico in sindicosEncontrados"
+                      :key="sindico.id"
+                      clickable
+                      class="rastreamento"
+                    >
+                      <q-item-section @click="mostrarPopupUsuario(sindico)">
+                        <!--{{ item.texto }}-->
 
-            <q-item-section
-              v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
-            >
-              <q-btn
-                v-if="!item.entregue"
-                rounded=""
-                flat
-                color="blue"
-                icon="edit"
-                name="edit"
-                label="Editar"
-                @click.stop="confirmarRecebimento(item)"
-              />
-            </q-item-section>
-            <q-item-section
-              v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
-            >
-              <q-btn
-                v-if="!item.entregue"
-                rounded=""
-                flat
-                color="red"
-                icon="remove"
-                name="remove"
-                label="Remover"
-                @click.stop="confirmarRecebimento(item)"
-              />
-            </q-item-section>
-          </q-item>
-        </q-list>
+                        <span @click="mostrarPopupUsuario(sindico)">
+                          {{ sindico.nome }}
+                        </span>
+                      </q-item-section>
+
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="primary"
+                          icon="edit"
+                          name="edit"
+                          label="Editar"
+                          @click.stop="mostrareditUsuario(sindico)"
+                        />
+                      </q-item-section>
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="red"
+                          icon="remove"
+                          name="remove"
+                          label="Remover"
+                          @click="mostrarPopupRemover(sindico)"
+                        />
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </div>
+              </form>
+            </q-tab-panel>
+
+            <q-tab-panel name="porteiro">
+              <div class="text-h6 row">
+                <img style="width: 45px" src="../assets/security.jpg" />
+                PORTEIROS
+              </div>
+              <form>
+                <div class="Usuarios-list">
+                  <q-list color="amber">
+                    <q-item
+                      v-for="porteiro in porteirosEncontrados"
+                      :key="porteiro.id"
+                      clickable
+                      class="rastreamento"
+                    >
+                      <q-item-section @click="mostrarPopupUsuario(porteiro)">
+                        <!--{{ item.texto }}-->
+
+                        <span @click="mostrarPopupUsuario(porteiro)">
+                          {{ porteiro.nome }}
+                        </span>
+                      </q-item-section>
+
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="primary"
+                          icon="edit"
+                          name="edit"
+                          label="Editar"
+                          @click.stop="mostrareditUsuario(porteiro)"
+                        />
+                      </q-item-section>
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="red"
+                          icon="remove"
+                          name="remove"
+                          label="Remover"
+                          @click="mostrarPopupRemover(porteiro)"
+                        />
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </div>
+              </form>
+            </q-tab-panel>
+            <q-tab-panel name="inquilino">
+              <div class="text-h6 row">
+                <img src="../assets/man.jpg" style="width: 40px" />
+                INQUILINOS
+              </div>
+              <form>
+                <div class="Usuarios-list">
+                  <q-list color="amber">
+                    <q-item
+                      v-for="item in inquilinosEncontrados"
+                      :key="item.id"
+                      clickable
+                      class="rastreamento"
+                    >
+                      <q-item-section @click="mostrarPopupUsuario(item)">
+                        <!--{{ item.texto }}-->
+
+                        <span @click="mostrarPopupUsuario(item)">
+                          {{ item.nome }}</span
+                        >
+                      </q-item-section>
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                      </q-item-section>
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="primary"
+                          icon="edit"
+                          name="edit"
+                          label="Editar"
+                          @click.stop="mostrareditUsuario(item)"
+                        />
+                      </q-item-section>
+                      <q-item-section
+                        v-if="
+                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
+                        "
+                      >
+                        <q-btn
+                          rounded=""
+                          flat
+                          color="red"
+                          icon="remove"
+                          name="remove"
+                          label="Remover"
+                          @click="mostrarPopupRemover(item)"
+                        />
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </div>
+              </form>
+            </q-tab-panel>
+          </q-tab-panels>
+        </q-card>
       </div>
-    </form>
-    <q-dialog v-model="popupAberto">
-      <q-card>
+    </div>
+    <q-dialog v-model="popupeditUsuariosAberto">
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="q-pa-md q-gutter-sm">
+            <p>
+              <strong>Nome:</strong>
+              <q-input color="teal" v-model="nomeSelecionado"></q-input>
+            </p>
+            <p>
+              <strong>Apartamento(s):</strong>
+            </p>
+            <q-input color="teal" v-model="apartamentoSelecionado"> </q-input>
+
+            <p>
+              <strong>cpf:</strong>
+              <q-input color="teal" v-model="cpfSelecionado"> </q-input>
+            </p>
+            <p>
+              <strong>Tipo:</strong>
+              <q-input color="teal" v-model="tipoSelecionado"></q-input>
+            </p>
+          </div>
+        </q-card-section>
+        <q-card-actions align="right" class="text-primary">
+          <q-btn label="Cancelar" color="red" v-close-popup />
+          <q-btn
+            label="Confirmar"
+            color="teal"
+            v-close-popup
+            @click="editUsuario()"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="popupUsuariosAberto">
+      <q-card style="min-width: 350px">
         <q-card-section>
           <div>
             <p>
               <strong>Nome:</strong>
-              {{ identificadorPopup.nome }}
+              {{ nomeSelecionado }}
             </p>
+            <p><strong>Apartamento(s):</strong></p>
+            <p v-for="ap in apartamentoSelecionado" :key="ap.value">
+              {{ ap }}
+            </p>
+            <p><strong>CPF:</strong> {{ cpfSelecionado }}</p>
             <p>
-              <strong>CPF:</strong>
-              {{ identificadorPopup.cpf }}
-            </p>
-            <p>
-              <strong>Apartamentos:</strong>
-            </p>
-            <p
-              v-for="index in identificadorPopup.apartamentos.length"
-              :key="index"
-            >
-              {{ identificadorPopup.apartamentos[index - 1] }}
-            </p>
-
-            <p>
-              <strong>Tipo:</strong>
-              {{ identificadorPopup.tipoUsuario }}
+              <strong>Tipo de usuário:</strong>
+              {{ tipoSelecionado }}
             </p>
           </div>
+          <!-- EDIT Usuarios-->
         </q-card-section>
         <q-card-actions align="right">
-          <q-btn label="Fechar" color="teal" @click="popupAberto = false" />
+          <q-btn label="Fechar" color="teal" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <!-- dados para o dialog coletado -->
+
+    <!-- dados para o dialog remover -->
+    <q-dialog
+      v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+      v-model="popupRemoverAberto"
+      persistent
+    >
+      <q-card style="min-width: 350px">
+        <q-card-section>
+          <div class="text-h6">
+            Gostaria de apagar o {{ tipoSelecionado }} {{ nomeSelecionado }}?
+          </div>
+        </q-card-section>
+        <q-card-actions align="right" class="text-primary">
+          <q-btn color="red" label="Cancelar" v-close-popup />
+          <q-btn color="teal" label="Confirmar" @click="apagarUsuario()" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -86,40 +283,145 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import api from "/api";
+import { Notify, date } from "quasar";
 const user = JSON.parse(sessionStorage.getItem("usuario"));
 
 export default defineComponent({
   name: "UsuariosPage",
   data() {
     return {
-      itens: [{}],
-      popupAberto: false,
-      identificadorPopup: "",
+      sindicosEncontrados: [{}],
+      porteirosEncontrados: [{}],
+      inquilinosEncontrados: [{}],
+      popupUsuariosAberto: ref(false),
+      popupeditUsuariosAberto: ref(false),
+      identificadorPopup: ref(""),
+      cpfSelecionado: ref(),
+      apartamentoSelecionado: [],
+      nomeSelecionado: ref(),
       tipoUsuario: user.tipoUsuario,
+      tipoSelecionado: ref(""),
+      dataEntregue: ref(""),
+      tab: ref("porteiro"),
+
+      popupColetaAberto: ref(false),
+      popupRemoverAberto: ref(false),
     };
   },
   mounted() {
-    this.getUsers();
+    this.getUsuarios();
   },
   methods: {
-    async listarUser() {},
-    mostrarPopup(id) {
-      this.identificadorPopup = id;
-
-      this.popupAberto = true;
-    },
-
-    async getUsers() {
+    async editUsuario() {
       await api
-        .get(`/usuarios`, { params: { apartamento: user.chaveAcesso } })
-        .then((res) => {
-          this.itens = res.data;
-          this.listarUser();
+        .patch(`/usuarios/${this.identificadorPopup.id}`, {
+          nome: this.nomeSelecionado,
+          cpf: this.cpfSelecionado,
+          tipoUsuario: this.tipoSelecionado,
+          apartamentos: [this.apartamentoSelecionado],
+        })
+        .then(() => {
+          Notify.create({
+            type: "positive",
+            message: "Edição Realizada!",
+          });
+          this.getUsuarios();
         })
         .catch((error) => {
-          console.log(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao editar.",
+          });
+        });
+    },
+    carregarDadosPop() {
+      this.tipoSelecionado = this.identificadorPopup.tipoUsuario;
+      this.cpfSelecionado = this.identificadorPopup.cpf;
+      this.apartamentoSelecionado = this.identificadorPopup.apartamentos;
+      this.nomeSelecionado = this.identificadorPopup.nome;
+    },
+
+    mostrarPopupRemover(item) {
+      this.identificadorPopup = item;
+      this.popupRemoverAberto = true;
+      this.carregarDadosPop();
+    },
+    mostrarPopupUsuario(id) {
+      this.identificadorPopup = id;
+      this.carregarDadosPop();
+      this.popupUsuariosAberto = true;
+    },
+    mostrareditUsuario(id) {
+      this.identificadorPopup = id;
+      this.carregarDadosPop();
+      this.popupeditUsuariosAberto = true;
+    },
+    mostrarPopupColeta(item) {
+      this.identificadorPopup = item;
+      this.popupColetaAberto = true;
+    },
+    async apagarUsuario() {
+      await api
+        .delete(`/usuarios/${this.identificadorPopup.id}`, {})
+        .then(() => {
+          Notify.create({
+            type: "positive",
+            message: "Usuario Apagado!",
+          });
+          this.getUsuarios();
+          this.popupRemoverAberto = false;
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao apagar.",
+          });
+        });
+    },
+
+    async getUsuarios() {
+      await api
+        .get(`/usuarios`, {
+          params: { tipoUsuario: "inquilino" },
+        })
+        .then((res) => {
+          this.inquilinosEncontrados = res.data;
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar.",
+          });
+        });
+
+      await api
+        .get(`/usuarios`, {
+          params: { tipoUsuario: "sindico" },
+        })
+        .then((res) => {
+          this.sindicosEncontrados = res.data;
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar.",
+          });
+        });
+
+      await api
+        .get(`/usuarios`, {
+          params: { tipoUsuario: "porteiro" },
+        })
+        .then((res) => {
+          this.porteirosEncontrados = res.data;
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar.",
+          });
         });
     },
   },

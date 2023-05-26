@@ -211,8 +211,34 @@
             <p>
               <strong>Apartamento(s):</strong>
             </p>
-            <q-input color="teal" v-model="apartamentoSelecionado"> </q-input>
-
+            <div class="row">
+              <q-input
+                color="teal"
+                placeholder="adicione apartamentos"
+                v-model="apartamento"
+              >
+              </q-input
+              ><q-btn flat icon="add" @click="adicionarApartamento()"></q-btn>
+            </div>
+            <div
+              class="row"
+              v-for="(item, index) in apartamentoSelecionado"
+              :key="item.id"
+            >
+              <q-field color="teal">
+                <p>
+                  {{ item }}
+                  <q-btn
+                    type=""
+                    icon="remove"
+                    color="red"
+                    flat
+                    label="remover"
+                    @click="removeApartamento(index)"
+                  />
+                </p>
+              </q-field>
+            </div>
             <p>
               <strong>cpf:</strong>
               <q-input color="teal" v-model="cpfSelecionado"> </q-input>
@@ -285,7 +311,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import api from "/api";
-import { Notify, date } from "quasar";
+import { Notify, TouchSwipe, date } from "quasar";
 const user = JSON.parse(sessionStorage.getItem("usuario"));
 
 export default defineComponent({
@@ -305,7 +331,7 @@ export default defineComponent({
       tipoSelecionado: ref(""),
       dataEntregue: ref(""),
       tab: ref("porteiro"),
-
+      apartamento: ref(""),
       popupColetaAberto: ref(false),
       popupRemoverAberto: ref(false),
     };
@@ -314,13 +340,20 @@ export default defineComponent({
     this.getUsuarios();
   },
   methods: {
+    adicionarApartamento() {
+      this.apartamentoSelecionado.push(this.apartamento);
+      this.apartamento = "";
+    },
+    removeApartamento(index) {
+      this.apartamentoSelecionado.splice(index, 1);
+    },
     async editUsuario() {
       await api
         .patch(`/usuarios/${this.identificadorPopup.id}`, {
           nome: this.nomeSelecionado,
           cpf: this.cpfSelecionado,
           tipoUsuario: this.tipoSelecionado,
-          apartamentos: [this.apartamentoSelecionado],
+          apartamentos: this.apartamentoSelecionado,
         })
         .then(() => {
           Notify.create({
@@ -336,11 +369,13 @@ export default defineComponent({
           });
         });
     },
+
     carregarDadosPop() {
       this.tipoSelecionado = this.identificadorPopup.tipoUsuario;
       this.cpfSelecionado = this.identificadorPopup.cpf;
       this.apartamentoSelecionado = this.identificadorPopup.apartamentos;
       this.nomeSelecionado = this.identificadorPopup.nome;
+      this.apartamento = "";
     },
 
     mostrarPopupRemover(item) {

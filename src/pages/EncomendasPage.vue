@@ -170,7 +170,18 @@
             </p>
             <p>
               <strong>Apartamento:</strong>
-              <q-input color="teal" v-model="apartamentoSelecionado"> </q-input>
+              <q-select
+                label=" Apartamento"
+                color="teal"
+                v-model="apartamentoSelecionado"
+                :options="listaApartamentos"
+                estilo=" largura : 250px "
+                :rules="[
+                  (val) =>
+                    (val && val.length > 0) ||
+                    'Por favor selecione um apartamento',
+                ]"
+              />
             </p>
             <p>
               <strong>Recebedor:</strong>
@@ -313,6 +324,7 @@ export default defineComponent({
       Coletor: ref(""),
       popupColetaAberto: ref(false),
       popupRemoverAberto: ref(false),
+      listaApartamentos: [],
     };
   },
   mounted() {
@@ -360,6 +372,7 @@ export default defineComponent({
     mostrarEditEncomenda(id) {
       this.identificadorPopup = id;
       this.carregarDadosPop();
+      this.getApartamentos();
       this.popupEditEncomendasAberto = true;
     },
     mostrarPopupColeta(item) {
@@ -432,6 +445,25 @@ export default defineComponent({
           Notify.create({
             type: "negative",
             message: "Erro ao consultar encomenda.",
+          });
+        });
+    },
+    async getApartamentos() {
+      await api
+        .get("/usuarios")
+        .then((res) => {
+          const apartamentosEncontrados = res.data
+            .flatMap(
+              (apartamentosEncontrados) => apartamentosEncontrados.apartamentos
+            )
+            .filter((apartamentosEncontrados) => apartamentosEncontrados != "")
+            .flat();
+          this.listaApartamentos = apartamentosEncontrados;
+        })
+        .catch((error) => {
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar na base.",
           });
         });
     },

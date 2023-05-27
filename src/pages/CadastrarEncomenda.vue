@@ -3,7 +3,7 @@
     class="cadastro q-pa-md"
     v-if="userExis == 'sindico' || userExis == 'porteiro'"
   >
-    <q-form @submit="enviarEncomenda()" class="q-gutter-md">
+    <q-form @submit="enviarEncomenda()">
       <h1 style="font-size: 22px; color: teal; font-weight: bolder">
         CADASTRO DE ENCOMENDAS
       </h1>
@@ -46,20 +46,17 @@
       />
 
       <q-input
-      filled
-      type="date"
-      color="teal"
-      v-model="dataRecebimento"
-      mask="##/##/####"
-      label="Data do Recebimento *"
-      :max="getDataAtualFormatada()"
-      lazy-rules
-      :rules="[
-        (val) => val !== null || 'Por favor, selecione a data',
-      ]"
-    />
-    <q-btn label="Cadastrar" color="teal" type="submit" />
-
+        filled
+        type="date"
+        color="teal"
+        v-model="dataRecebimento"
+        mask="##/##/####"
+        label="Data do Recebimento *"
+        :max="getDataAtualFormatada()"
+        lazy-rules
+        :rules="[(val) => val !== null || 'Por favor, selecione a data']"
+      />
+      <q-btn label="Cadastrar" class="full-width" color="teal" type="submit" />
     </q-form>
   </div>
 </template>
@@ -125,14 +122,14 @@ export default defineComponent({
             message: "Erro ao consultar na base.",
           });
         });
-        },
-        getDataAtualFormatada() {
-          const dataAtual = new Date();
-          const dia = String(dataAtual.getDate()).padStart(2, '0');
-          const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
-          const ano = dataAtual.getFullYear();
-          return `${ano}-${mes}-${dia}`;
-        },
+    },
+    getDataAtualFormatada() {
+      const dataAtual = new Date();
+      const dia = String(dataAtual.getDate()).padStart(2, "0");
+      const mes = String(dataAtual.getMonth() + 1).padStart(2, "0");
+      const ano = dataAtual.getFullYear();
+      return `${ano}-${mes}-${dia}`;
+    },
   },
 });
 </script>

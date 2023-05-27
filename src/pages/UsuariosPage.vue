@@ -383,8 +383,6 @@ export default defineComponent({
     },
     async editUsuario() {
       await api.get(`/usuarios?cpf=${this.cpfSelecionado}`, {}).then((res) => {
-        console.log(this.cpfSelecionado);
-        console.log(this.identificadorPopup.cpf);
         if (
           (res.data.length == 0 &&
             this.cpfSelecionado != this.identificadorPopup.cpf) ||

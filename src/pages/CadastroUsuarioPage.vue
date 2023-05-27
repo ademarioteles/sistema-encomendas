@@ -144,8 +144,8 @@ export default defineComponent({
       this.apartamentos.push(this.apartamento);
       this.apartamento = "";
     },
-    removeApartamento(index){
-      this.apartamentos.splice(index,1)
+    removeApartamento(index) {
+      this.apartamentos.splice(index, 1);
     },
     deixarNulo() {
       this.cpf = ref("");
@@ -153,8 +153,8 @@ export default defineComponent({
       this.codigoDeAcesso = ref("");
       this.apartamentos = [];
     },
-    enviarUsuario() {
-      api
+    async enviarUsuario() {
+      await api
         .get(`/usuarios?cpf=${this.cpf}`, {})
         .then((res) => {
           if (

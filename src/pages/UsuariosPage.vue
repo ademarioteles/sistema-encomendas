@@ -34,8 +34,6 @@
                       class="rastreamento"
                     >
                       <q-item-section @click="mostrarPopupUsuario(sindico)">
-                        <!--{{ item.texto }}-->
-
                         <span @click="mostrarPopupUsuario(sindico)">
                           {{ sindico.nome }}
                         </span>
@@ -93,8 +91,6 @@
                       class="rastreamento"
                     >
                       <q-item-section @click="mostrarPopupUsuario(porteiro)">
-                        <!--{{ item.texto }}-->
-
                         <span @click="mostrarPopupUsuario(porteiro)">
                           {{ porteiro.nome }}
                         </span>
@@ -218,6 +214,9 @@
               ><q-btn
                 flat
                 icon="add"
+                stack-label
+                counter
+                maxlength="4"
                 @click="adicionarApartamento()"
                 :disable="apartamento.trim() === ''"
               ></q-btn>

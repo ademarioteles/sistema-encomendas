@@ -38,6 +38,13 @@
       "codigoDeAcesso": "",
       "apartamentos": [],
       "id": 4
+    },
+    {
+      "nome": "asdasd",
+      "cpf": "000.000.000-35",
+      "tipoUsuario": "inquilino",
+      "apartamentos": [],
+      "id": 5
     }
   ]
 }

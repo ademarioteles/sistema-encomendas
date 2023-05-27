@@ -47,6 +47,7 @@
                         "
                       >
                         <q-btn
+                          :disable="tipoUsuario == 'porteiro'"
                           rounded=""
                           flat
                           color="primary"
@@ -105,6 +106,7 @@
                         "
                       >
                         <q-btn
+                          :disable="tipoUsuario == 'porteiro'"
                           rounded=""
                           flat
                           color="primary"
@@ -149,24 +151,19 @@
                       class="rastreamento"
                     >
                       <q-item-section @click="mostrarPopupUsuario(item)">
-                        <!--{{ item.texto }}-->
-
                         <span @click="mostrarPopupUsuario(item)">
-                          {{ item.nome }}</span
-                        >
+                          {{ item.nome }}
+                        </span>
                       </q-item-section>
-                      <q-item-section
-                        v-if="
-                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
-                        "
-                      >
-                      </q-item-section>
-                      <q-item-section
-                        v-if="
-                          tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'
-                        "
-                      >
+                      <q-item-section>
                         <q-btn
+                          v-if="
+                            (item.tipoUsuario == 'inquilino' &&
+                              tipoUsuario == 'porteiro') ||
+                            item.tipoUsuario == 'porteiro' ||
+                            (item.tipoUsuario == 'inquilino' &&
+                              tipoUsuario == 'sindico')
+                          "
                           rounded=""
                           flat
                           color="primary"
@@ -252,9 +249,7 @@
               <strong>Tipo:</strong>
               <br />
               <q-radio
-                :disable="
-                  tipoUsuario == 'inquilino' || tipoUsuario == 'porteiro'
-                "
+                v-if="tipoUsuario == 'sindico'"
                 keep-color
                 v-model="tipoSelecionado"
                 val="sindico"
@@ -263,9 +258,7 @@
                 @click="verificarOpcao()"
               />
               <q-radio
-                :disable="
-                  tipoUsuario == 'inquilino' || tipoUsuario == 'porteiro'
-                "
+                v-if="tipoUsuario == 'sindico'"
                 keep-color
                 v-model="tipoSelecionado"
                 val="porteiro"
@@ -274,13 +267,13 @@
                 @click="verificarOpcao()"
               />
               <q-radio
+                v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
                 keep-color
                 v-model="tipoSelecionado"
                 val="inquilino"
                 label="Inquilino"
                 color="teal"
                 @click="verificarOpcao()"
-                :disable="tipoUsuario == 'inquilino'"
               />
             </p>
           </div>

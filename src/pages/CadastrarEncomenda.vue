@@ -109,8 +109,13 @@ export default defineComponent({
       await api
         .get("/usuarios")
         .then((res) => {
-          this.usuario = res.data;
-          this.validarDados();
+          const apartamentosEncontrados = res.data
+            .flatMap(
+              (apartamentosEncontrados) => apartamentosEncontrados.apartamentos
+            )
+            .filter((apartamentosEncontrados) => apartamentosEncontrados != "")
+            .flat();
+          this.listaApartamentos = apartamentosEncontrados;
         })
         .catch((error) => {
           Notify.create({
@@ -118,15 +123,6 @@ export default defineComponent({
             message: "Erro ao consultar na base.",
           });
         });
-    },
-    validarDados() {
-      const apartamentosEncontrados = this.usuario
-        .flatMap(
-          (apartamentosEncontrados) => apartamentosEncontrados.apartamentos
-        )
-        .filter((apartamentosEncontrados) => apartamentosEncontrados != "")
-        .flat();
-      this.listaApartamentos = apartamentosEncontrados;
     },
   },
 });

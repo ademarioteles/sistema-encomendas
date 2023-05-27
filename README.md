@@ -11,7 +11,7 @@ O projeto consiste em criar um aplicativo para um condomínio que permita aos in
 
 ## 🚀 Começando
 
-Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
+Essas instruções irão ajudá-lo a obter uma cópia do projeto em execução na sua máquina local para fins de desenvolvimento e teste.
 
 ### 📋 Pré-requisitos
 
@@ -28,25 +28,24 @@ Vue.js
 ### 🔧 Instalação
 
 
-Uma série de exemplos passo-a-passo para te ajudar com a instalação do Json-Server
+Siga estas etapas para configurar o ambiente de desenvolvimento:
 
-* Instalar  e executar o json-server
+* Instale e execute o JSON Server:
 
 ```bash
 
 npm install -g json-server
 
 ```
-*Executar o db.json com o json server
+* Execute o servidor JSON com o arquivo 'db.json':
 
 ```bash
 
-É necessario esta dentro da pasta do projeto para rodar o comando.
 json-server --watch db.json
 
 ```
 
-* Instalar as dependencias do projeto
+* Instale as dependências do projeto:
 
 ```bash
 
@@ -54,7 +53,7 @@ json-server --watch db.json
 
 npm install
 ```
-* Rodar o projeto
+* Execute o projeto:
 
 ```bash
 
@@ -66,7 +65,8 @@ npm run dev
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
+Principais ferramentas utilizadas na construção do projeto:
+
 
 * [Quasar](https://quasar.dev/) 
 * [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS )
@@ -74,3 +74,18 @@ Mencione as ferramentas que você usou para criar seu projeto
 * [Visual Studio Code](https://code.visualstudio.com) 
 * [App.vue](https://vuejs.org)
 * [Git](https://docs.github.com/pt/account-and-profile)
+
+
+## 💡 Recursos Adicionais
+
+Aqui estão alguns recursos adicionais que podem ser implementados ou explorados:
+
+* Notificações de entrega: Implemente um sistema de notificações para que os inquilinos sejam alertados quando uma nova encomenda chegar à portaria.
+
+* Comunicação interna: Crie um recurso de comunicação interna, como um mural de recados, para que os moradores possam se comunicar entre si e com a administração do condomínio.
+
+* Relatórios e estatísticas: Desenvolva funcionalidades que gerem relatórios e estatísticas sobre o uso do aplicativo e as atividades do condomínio.
+
+## 🤝 Contribuição
+
+Contribuições são sempre bem-vindas! Se você tiver alguma ideia, sugestão ou encontrou algum problema no projeto, sinta-se à vontade para abrir uma nova issue ou enviar um pull request.

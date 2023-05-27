@@ -58,7 +58,8 @@
         (val) => val !== null || 'Por favor, selecione a data',
       ]"
     />
-      <q-btn class="full-width" label="Cadastrar" color="teal" type="submit" />
+    <q-btn label="Cadastrar" color="teal" type="submit" />
+
     </q-form>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white" v-if="userExis == 'sindico' || userExis == 'porteiro'">
-    <div class="cadastro">
+    <div class="cadastro q-pa-md">
       <q-form @submit="enviarUsuario()">
         <h5 style="font-size: 25px; color: teal; font-weight: bolder">
           CADASTRO DE USUÁRIO

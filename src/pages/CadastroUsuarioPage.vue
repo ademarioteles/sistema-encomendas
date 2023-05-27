@@ -103,7 +103,7 @@
           type="submit"
           :loading="submitting"
           label="Enviar"
-          class="q-mt-md"
+          class="full-width"
           color="teal"
         >
           <template v-slot:loading>

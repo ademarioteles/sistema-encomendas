@@ -204,7 +204,7 @@
             <p>
               <strong>Apartamento(s):</strong>
             </p>
-            <div class="row">
+            <div class="row" v-if="apartamentoSelecionado.length > 0">
               <q-input
                 color="teal"
                 placeholder="adicione apartamentos"
@@ -220,6 +220,9 @@
                 @click="adicionarApartamento()"
                 :disable="apartamento.trim() === ''"
               ></q-btn>
+            </div>
+            <div v-else>
+              <p>Não possui apartamentos.</p>
             </div>
             <div
               class="row"
@@ -296,10 +299,16 @@
               <strong>Nome:</strong>
               {{ nomeSelecionado }}
             </p>
+
             <p><strong>Apartamento(s):</strong></p>
-            <p v-for="ap in apartamentoSelecionado" :key="ap.value">
-              {{ ap }}
-            </p>
+            <div v-if="apartamentoSelecionado.length > 0">
+              <p v-for="ap in apartamentoSelecionado" :key="ap.value">
+                {{ ap }}
+              </p>
+            </div>
+            <div v-else>
+              <p>Não possui apartamentos.</p>
+            </div>
             <p><strong>CPF:</strong> {{ cpfSelecionado }}</p>
             <p>
               <strong>Tipo de usuário:</strong>

@@ -46,17 +46,18 @@
       />
 
       <q-input
-        filled
-        type="date"
-        color="teal"
-        v-model="dataRecebimento"
-        mask="##/##/####"
-        label="Data do Recebimento *"
-        lazy-rules
-        :rules="[
-          (val) => (val !== null && val !== '') || 'Por favor selecione a data',
-        ]"
-      />
+      filled
+      type="date"
+      color="teal"
+      v-model="dataRecebimento"
+      mask="##/##/####"
+      label="Data do Recebimento *"
+      :max="getDataAtualFormatada()"
+      lazy-rules
+      :rules="[
+        (val) => val !== null || 'Por favor, selecione a data',
+      ]"
+    />
       <q-btn class="full-width" label="Cadastrar" color="teal" type="submit" />
     </q-form>
   </div>
@@ -76,7 +77,7 @@ export default defineComponent({
       userExis: userExist.tipoUsuario,
       apartamento: ref(null),
       recebedor: ref(""),
-      dataRecebimento: ref(""),
+      dataRecebimento: null,
       usuario: {},
       listaApartamentos: [],
     };
@@ -123,7 +124,14 @@ export default defineComponent({
             message: "Erro ao consultar na base.",
           });
         });
-    },
+        },
+        getDataAtualFormatada() {
+          const dataAtual = new Date();
+          const dia = String(dataAtual.getDate()).padStart(2, '0');
+          const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+          const ano = dataAtual.getFullYear();
+          return `${ano}-${mes}-${dia}`;
+        },
   },
 });
 </script>

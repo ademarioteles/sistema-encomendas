@@ -250,34 +250,38 @@
             </p>
             <p>
               <strong>Tipo:</strong>
-            <br>
+              <br />
               <q-radio
-          keep-color
-          v-model="tipoSelecionado"
-          val="sindico"
-          label="Sindico"
-          color="teal"
-          @click="verificarOpcao()"
-          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
-        />
-        <q-radio
-          keep-color
-          v-model="tipoSelecionado"
-          val="porteiro"
-          label="Porteiro"
-          color="teal"
-          @click="verificarOpcao()"
-          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
-        />
-        <q-radio
-          keep-color
-          v-model="tipoSelecionado"
-          val="inquilino"
-          label="Inquilino"
-          color="teal"
-          @click="verificarOpcao()"
-          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
-        />
+                :disable="
+                  tipoUsuario == 'inquilino' || tipoUsuario == 'porteiro'
+                "
+                keep-color
+                v-model="tipoSelecionado"
+                val="sindico"
+                label="Sindico"
+                color="teal"
+                @click="verificarOpcao()"
+              />
+              <q-radio
+                :disable="
+                  tipoUsuario == 'inquilino' || tipoUsuario == 'porteiro'
+                "
+                keep-color
+                v-model="tipoSelecionado"
+                val="porteiro"
+                label="Porteiro"
+                color="teal"
+                @click="verificarOpcao()"
+              />
+              <q-radio
+                keep-color
+                v-model="tipoSelecionado"
+                val="inquilino"
+                label="Inquilino"
+                color="teal"
+                @click="verificarOpcao()"
+                :disable="tipoUsuario == 'inquilino'"
+              />
             </p>
           </div>
         </q-card-section>

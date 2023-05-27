@@ -87,14 +87,15 @@
         </q-input>
 
         <ul>
-          <p v-for="ap in apartamentos" :key="ap.value">
+          <p v-for="(ap, index) in apartamentos" :key="ap.id">
             {{ ap }}
             <q-btn
               outline
-              color="primary"
+              color="red"
               icon="remove"
               name="remove"
               label="Remover"
+              @click="removeApartamento(index)"
             />
           </p>
         </ul>
@@ -124,7 +125,7 @@ import { Notify } from "quasar";
 export default defineComponent({
   name: "CadastroUsuarioPage",
 
-  setup() {
+  data() {
     const userExist = JSON.parse(sessionStorage.getItem("usuario"));
 
     return {
@@ -142,6 +143,9 @@ export default defineComponent({
     adicionarApartamento() {
       this.apartamentos.push(this.apartamento);
       this.apartamento = "";
+    },
+    removeApartamento(index){
+      this.apartamentos.splice(index,1)
     },
     deixarNulo() {
       this.cpf = ref("");

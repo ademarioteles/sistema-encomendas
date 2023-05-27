@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white" v-if="userExis == 'sindico' || userExis == 'porteiro'">
     <div class="cadastro q-pa-md">
-      <q-form @submit="enviarUsuario()" class="q-gutter-md">
+      <q-form @submit="enviarUsuario()">
         <h5 style="font-size: 25px; color: teal; font-weight: bolder">
           CADASTRO DE USUÁRIO
         </h5>
@@ -151,21 +151,64 @@ export default defineComponent({
     },
     enviarUsuario() {
       api
-        .post("/usuarios", {
-          nome: this.nome,
-          cpf: this.cpf,
-          tipoUsuario: this.tipoUsuario,
-          codigoDeAcesso: this.codigoDeAcesso,
-          apartamentos: this.apartamentos,
-        })
-        .then(() => {
-          Notify.create({
-            type: "positive",
-            message: "Usuário Cadastrado",
-          });
+        .get(`/usuarios?cpf=${this.cpf}`, {})
+        .then((res) => {
+          if (
+            res.data.length == 0 &&
+            (this.tipoUsuario == "sindico" || this.tipoUsuario == "porteiro")
+          ) {
+            api
+              .post("/usuarios", {
+                nome: this.nome,
+                cpf: this.cpf,
+                codigoAcesso: this.codigoDeAcesso,
+                tipoUsuario: this.tipoUsuario,
+                apartamentos: this.apartamentos,
+              })
+              .then((res) => {
+                Notify.create({
+                  type: "positive",
+                  message: "Cadrasto realizado com sucesso.",
+                });
+              })
+              .catch((error) => {
+                Notify.create({
+                  type: "negative",
+                  message: "Não foi possivel realizar o cadastro.",
+                });
+              });
+          } else if (res.data.length == 0 && this.tipoUsuario == "inquilino") {
+            api
+              .post("/usuarios", {
+                nome: this.nome,
+                cpf: this.cpf,
+                tipoUsuario: this.tipoUsuario,
+                apartamentos: this.apartamentos,
+              })
+              .then((res) => {
+                Notify.create({
+                  type: "positive",
+                  message: "Cadrasto realizado com sucesso.",
+                });
+              })
+              .catch((error) => {
+                Notify.create({
+                  type: "negative",
+                  message: "Não foi possivel realizar o cadastro.",
+                });
+              });
+          } else {
+            Notify.create({
+              type: "negative",
+              message: "Conta já existente na base.",
+            });
+          }
         })
         .catch((error) => {
-          alert(error);
+          Notify.create({
+            type: "negative",
+            message: "Erro ao consultar na base.",
+          });
         });
     },
     isCpf(cpf) {

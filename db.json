@@ -2,25 +2,24 @@
   "encomendas": [
     {
       "identificador": "bicicleta",
-      "apartamento": "102B",
+      "apartamento": "105f",
       "recebedor": "joao",
       "dataRecebimento": "24/07/1994",
       "dataEntrega": "30/05/2023",
       "entregue": true,
       "id": 1
+    },
+    {
+      "identificador": "asdasd",
+      "apartamento": "102B",
+      "recebedor": "asdasdas",
+      "dataRecebimento": "18/03/1998",
+      "dataEntrega": null,
+      "entregue": false,
+      "id": 2
     }
   ],
   "usuarios": [
-    {
-      "nome": "Mendonça",
-      "cpf": "000.000.000-33",
-      "tipoUsuario": "porteiro",
-      "codigoDeAcesso": "010101",
-      "apartamentos": [
-        "105f"
-      ],
-      "id": 1
-    },
     {
       "nome": "Muller",
       "cpf": "000.000.000-34",
@@ -39,39 +38,6 @@
       "codigoDeAcesso": "",
       "apartamentos": [],
       "id": 4
-    },
-    {
-      "nome": "ademario",
-      "cpf": "000.000.000-75",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [],
-      "id": 6
-    },
-    {
-      "nome": "adlasdkasldk",
-      "cpf": "555.555.555-55",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [
-        "105f",
-        "107f",
-        "405f",
-        "555f"
-      ],
-      "id": 7
-    },
-    {
-      "nome": "dasdlasçdsa",
-      "cpf": "555.555.555-55",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [
-        "105f",
-        "566f",
-        "105f"
-      ],
-      "id": 8
     }
   ]
 }

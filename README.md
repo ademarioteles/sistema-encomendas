@@ -49,7 +49,7 @@ json-server --watch db.json
 
 ```bash
 
-_É necessario esta dentro da pasta do projeto para rodar o comando._
+#É necessario esta dentro da pasta do projeto para rodar o comando
 
 npm install
 ```
@@ -57,7 +57,7 @@ npm install
 
 ```bash
 
-_É necessario esta dentro da pasta do projeto para rodar o comando._
+#É necessario esta dentro da pasta do projeto para rodar o comando._
 
 npm run dev
 ```

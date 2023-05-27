@@ -257,7 +257,6 @@
                 val="sindico"
                 label="Sindico"
                 color="teal"
-                @click="verificarOpcao()"
               />
               <q-radio
                 v-if="tipoUsuario == 'sindico'"
@@ -266,7 +265,6 @@
                 val="porteiro"
                 label="Porteiro"
                 color="teal"
-                @click="verificarOpcao()"
               />
               <q-radio
                 v-if="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
@@ -275,7 +273,6 @@
                 val="inquilino"
                 label="Inquilino"
                 color="teal"
-                @click="verificarOpcao()"
               />
             </p>
           </div>
@@ -385,26 +382,42 @@ export default defineComponent({
       this.apartamentoSelecionado.splice(index, 1);
     },
     async editUsuario() {
-      await api
-        .patch(`/usuarios/${this.identificadorPopup.id}`, {
-          nome: this.nomeSelecionado,
-          cpf: this.cpfSelecionado,
-          tipoUsuario: this.tipoSelecionado,
-          apartamentos: this.apartamentoSelecionado,
-        })
-        .then(() => {
-          Notify.create({
-            type: "positive",
-            message: "Edição Realizada!",
-          });
-          this.getUsuarios();
-        })
-        .catch((error) => {
+      await api.get(`/usuarios?cpf=${this.cpfSelecionado}`, {}).then((res) => {
+        console.log(this.cpfSelecionado);
+        console.log(this.identificadorPopup.cpf);
+        if (
+          (res.data.length == 0 &&
+            this.cpfSelecionado != this.identificadorPopup.cpf) ||
+          (res.data.length > 0 &&
+            this.cpfSelecionado == this.identificadorPopup.cpf)
+        ) {
+          api
+            .patch(`/usuarios/${this.identificadorPopup.id}`, {
+              nome: this.nomeSelecionado,
+              cpf: this.cpfSelecionado,
+              tipoUsuario: this.tipoSelecionado,
+              apartamentos: this.apartamentoSelecionado,
+            })
+            .then(() => {
+              Notify.create({
+                type: "positive",
+                message: "Edição Realizada!",
+              });
+              this.getUsuarios();
+            })
+            .catch((error) => {
+              Notify.create({
+                type: "negative",
+                message: "Erro ao editar.",
+              });
+            });
+        } else {
           Notify.create({
             type: "negative",
-            message: "Erro ao editar.",
+            message: "O usuario já existe na base.",
           });
-        });
+        }
+      });
     },
 
     carregarDadosPop() {

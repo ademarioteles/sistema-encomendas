@@ -30,14 +30,14 @@ Vue.js
 
 Siga estas etapas para configurar o ambiente de desenvolvimento:
 
-* Instale e execute o JSON Server:
+**Instale e execute o JSON Server:**
 
 ```bash
 
 npm install -g json-server
 
 ```
-* Execute o servidor JSON com o arquivo 'db.json':
+**Execute o servidor JSON com o arquivo 'db.json':**
 
 ```bash
 
@@ -45,19 +45,19 @@ json-server --watch db.json
 
 ```
 
-* Instale as dependências do projeto:
+**Instale as dependências do projeto:**
 
 ```bash
 
-#É necessario esta dentro da pasta do projeto para rodar o comando.
+_É necessario esta dentro da pasta do projeto para rodar o comando._
 
 npm install
 ```
-* Execute o projeto:
+**Execute o projeto:**
 
 ```bash
 
-#É necessario esta dentro da pasta do projeto para rodar o comando.
+_É necessario esta dentro da pasta do projeto para rodar o comando._
 
 npm run dev
 ```
@@ -80,11 +80,11 @@ Principais ferramentas utilizadas na construção do projeto:
 
 Aqui estão alguns recursos adicionais que podem ser implementados ou explorados:
 
-* Notificações de entrega: Implemente um sistema de notificações para que os inquilinos sejam alertados quando uma nova encomenda chegar à portaria.
+* **Notificações de entrega**: Implemente um sistema de notificações para que os inquilinos sejam alertados quando uma nova encomenda chegar à portaria.
 
-* Comunicação interna: Crie um recurso de comunicação interna, como um mural de recados, para que os moradores possam se comunicar entre si e com a administração do condomínio.
+* **Comunicação interna:** Crie um recurso de comunicação interna, como um mural de recados, para que os moradores possam se comunicar entre si e com a administração do condomínio.
 
-* Relatórios e estatísticas: Desenvolva funcionalidades que gerem relatórios e estatísticas sobre o uso do aplicativo e as atividades do condomínio.
+* **Relatórios e estatísticas:** Desenvolva funcionalidades que gerem relatórios e estatísticas sobre o uso do aplicativo e as atividades do condomínio.
 
 ## 🤝 Contribuição
 

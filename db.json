@@ -21,16 +21,6 @@
   ],
   "usuarios": [
     {
-      "nome": "Mendonça",
-      "cpf": "000.000.000-33",
-      "tipoUsuario": "porteiro",
-      "codigoDeAcesso": "010101",
-      "apartamentos": [
-        "105f"
-      ],
-      "id": 1
-    },
-    {
       "nome": "Muller",
       "cpf": "000.000.000-34",
       "tipoUsuario": "sindico",
@@ -48,39 +38,6 @@
       "codigoDeAcesso": "",
       "apartamentos": [],
       "id": 4
-    },
-    {
-      "nome": "ademario",
-      "cpf": "000.000.000-75",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [],
-      "id": 6
-    },
-    {
-      "nome": "adlasdkasldk",
-      "cpf": "555.555.555-55",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [
-        "105f",
-        "107f",
-        "405f",
-        "555f"
-      ],
-      "id": 7
-    },
-    {
-      "nome": "dasdlasçdsa",
-      "cpf": "555.555.555-55",
-      "tipoUsuario": "inquilino",
-      "codigoDeAcesso": "",
-      "apartamentos": [
-        "105f",
-        "566f",
-        "105f"
-      ],
-      "id": 8
     }
   ]
 }

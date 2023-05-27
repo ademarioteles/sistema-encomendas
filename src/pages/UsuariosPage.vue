@@ -218,7 +218,12 @@
                 v-model="apartamento"
               >
               </q-input
-              ><q-btn flat icon="add" @click="adicionarApartamento()"></q-btn>
+              ><q-btn
+                flat
+                icon="add"
+                @click="adicionarApartamento()"
+                :disable="apartamento.trim() === ''"
+              ></q-btn>
             </div>
             <div
               class="row"
@@ -240,12 +245,39 @@
               </q-field>
             </div>
             <p>
-              <strong>cpf:</strong>
+              <strong>CPF:</strong>
               <q-input color="teal" v-model="cpfSelecionado"> </q-input>
             </p>
             <p>
               <strong>Tipo:</strong>
-              <q-input color="teal" v-model="tipoSelecionado"></q-input>
+            <br>
+              <q-radio
+          keep-color
+          v-model="tipoSelecionado"
+          val="sindico"
+          label="Sindico"
+          color="teal"
+          @click="verificarOpcao()"
+          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+        />
+        <q-radio
+          keep-color
+          v-model="tipoSelecionado"
+          val="porteiro"
+          label="Porteiro"
+          color="teal"
+          @click="verificarOpcao()"
+          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+        />
+        <q-radio
+          keep-color
+          v-model="tipoSelecionado"
+          val="inquilino"
+          label="Inquilino"
+          color="teal"
+          @click="verificarOpcao()"
+          :disable="tipoUsuario == 'sindico' || tipoUsuario == 'porteiro'"
+        />
             </p>
           </div>
         </q-card-section>

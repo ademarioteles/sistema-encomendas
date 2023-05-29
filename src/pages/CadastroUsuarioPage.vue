@@ -54,7 +54,7 @@
           ]"
         />
         <q-input
-          v-if="tipoUsuario === 'sindico'"
+          v-if="tipoUsuario === 'sindico' || tipoUsuario === 'porteiro'"
           filled
           v-model="codigoDeAcesso"
           label="CHAVE DE ACESSO:"

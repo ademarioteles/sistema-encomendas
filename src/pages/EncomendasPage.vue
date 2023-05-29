@@ -258,6 +258,7 @@
               v-model="dataEntrega"
               mask="##/##/####"
               label="Data da Coleta"
+              :max="getDataAtualFormatada()"
               lazy-rules
               :rules="[
                 (val) =>
@@ -319,7 +320,7 @@ export default defineComponent({
       identificadorSelecionado: ref(),
       tipoUsuario: user.tipoUsuario,
       dataRecebimento: ref(""),
-      dataEntregue: ref(""),
+      dataEntregue: null,
       tab: ref("recebidos"),
       Coletor: ref(""),
       popupColetaAberto: ref(false),
@@ -331,6 +332,13 @@ export default defineComponent({
     this.getEncomendas();
   },
   methods: {
+    getDataAtualFormatada() {
+      const dataAtual = new Date();
+      const dia = String(dataAtual.getDate()).padStart(2, "0");
+      const mes = String(dataAtual.getMonth() + 1).padStart(2, "0");
+      const ano = dataAtual.getFullYear();
+      return `${ano}-${mes}-${dia}`;
+    },
     async editEncomenda() {
       await api
         .patch(`/encomendas/${this.identificadorPopup.id}`, {
@@ -466,6 +474,7 @@ export default defineComponent({
             message: "Erro ao consultar na base.",
           });
         });
+
     },
   },
 });

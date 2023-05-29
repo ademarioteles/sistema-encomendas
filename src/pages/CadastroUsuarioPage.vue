@@ -172,7 +172,7 @@ export default defineComponent({
               .then((res) => {
                 Notify.create({
                   type: "positive",
-                  message: "Cadrasto realizado com sucesso.",
+                  message: "Cadrastro realizado com sucesso.",
                 });
               })
               .catch((error) => {

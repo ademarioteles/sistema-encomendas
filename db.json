@@ -1,22 +1,13 @@
 {
   "encomendas": [
     {
-      "identificador": "bicicleta",
-      "apartamento": "105f",
-      "recebedor": "joao",
-      "dataRecebimento": "24/07/1994",
-      "dataEntrega": "30/05/2023",
-      "entregue": true,
-      "id": 1
-    },
-    {
-      "identificador": "asdasd",
-      "apartamento": "102B",
-      "recebedor": "asdasdas",
-      "dataRecebimento": "18/03/1998",
+      "identificador": "livro",
+      "apartamento": "103C",
+      "recebedor": "joazinho",
+      "dataRecebimento": "30/05/2023",
       "dataEntrega": null,
       "entregue": false,
-      "id": 2
+      "id": 1
     }
   ],
   "usuarios": [
@@ -34,7 +25,7 @@
     {
       "nome": "FELIXf",
       "cpf": "000.000.000-25",
-      "tipoUsuario": "porteiro",
+      "tipoUsuario": "inquilino",
       "codigoDeAcesso": "",
       "apartamentos": [],
       "id": 4
@@ -42,9 +33,21 @@
     {
       "nome": "asdasd",
       "cpf": "000.000.000-35",
-      "tipoUsuario": "inquilino",
+      "tipoUsuario": "porteiro",
       "apartamentos": [],
-      "id": 5
+      "id": 5,
+      "codigoDeAcesso": "5555"
+    },
+    {
+      "nome": "teles",
+      "cpf": "000.000.000-02",
+      "tipoUsuario": "inquilino",
+      "apartamentos": [
+        "105F",
+        "707F",
+        "505F"
+      ],
+      "id": 6
     }
   ]
 }

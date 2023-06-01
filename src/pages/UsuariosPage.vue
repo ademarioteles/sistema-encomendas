@@ -204,7 +204,7 @@
             <p>
               <strong>Apartamento(s):</strong>
             </p>
-            <div class="row" v-if="apartamentoSelecionado.length > 0">
+            <div class="row">
               <q-input
                 color="teal"
                 placeholder="adicione apartamentos"
@@ -221,9 +221,7 @@
                 :disable="apartamento.trim() === ''"
               ></q-btn>
             </div>
-            <div v-else>
-              <p>Não possui apartamentos.</p>
-            </div>
+
             <div
               class="row"
               v-for="(item, index) in apartamentoSelecionado"
@@ -243,6 +241,7 @@
                 </p>
               </q-field>
             </div>
+
             <p>
               <strong>CPF:</strong>
               <q-input color="teal" v-model="cpfSelecionado"> </q-input>
@@ -274,6 +273,18 @@
                 label="Inquilino"
                 color="teal"
               />
+            </p>
+            <p
+              v-if="
+                tipoSelecionado == 'sindico' || tipoSelecionado == 'porteiro'
+              "
+            >
+              <strong>Chave de Acesso:</strong>
+              <q-input
+                color="teal"
+                type="password"
+                v-model="chaveAcesso"
+              ></q-input>
             </p>
           </div>
         </q-card-section>
@@ -368,6 +379,7 @@ export default defineComponent({
       apartamento: ref(""),
       popupColetaAberto: ref(false),
       popupRemoverAberto: ref(false),
+      chaveAcesso: ref(),
     };
   },
   mounted() {
@@ -395,6 +407,7 @@ export default defineComponent({
               cpf: this.cpfSelecionado,
               tipoUsuario: this.tipoSelecionado,
               apartamentos: this.apartamentoSelecionado,
+              codigoDeAcesso: this.chaveAcesso,
             })
             .then(() => {
               Notify.create({
@@ -423,6 +436,7 @@ export default defineComponent({
       this.cpfSelecionado = this.identificadorPopup.cpf;
       this.apartamentoSelecionado = this.identificadorPopup.apartamentos;
       this.nomeSelecionado = this.identificadorPopup.nome;
+      this.chaveAcesso = this.identificadorPopup.codigoDeAcesso;
       this.apartamento = "";
     },
 

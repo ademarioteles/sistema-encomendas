@@ -69,25 +69,31 @@ Abaixo estão os detalhes dos usuários registrados no sistema:
 
 **SINDICO**
 
-CPF: 000.000.000-34
-Código de Acesso: 010101
+```bash
+CPF: 000.000.000-34,
+Código de Acesso: 010101,
+```
 
 **PORTEIRO**
 
-CPF: 000.000.000-35
-Chave de Acesso: 5555
+```bash
+CPF: 000.000.000-35,
+Chave de Acesso: 5555,
+```
 
 **INQUILINO**
 
-CPF: 000.000.000-25
-Numero do Apartamento: 105F
+```bash
+CPF: 000.000.000-25,
+Numero do Apartamento: 105F,
+```
 
 **Instruções de Acesso**
 
 Abra o navegador da web de sua preferência.
 Acesse a página de login do sistema.
 Insira suas credenciais de acesso conforme as informações fornecidas acima.
-Se você é um síndico ou porteiro, insira seu CPF e código de acesso. Se você é um inquilino, insira apenas seu CPF.
+Se você é um síndico ou porteiro, insira seu CPF e código de acesso. Se você é um inquilino, insira apenas seu CPF e numero do apartamento
 Clique no botão de login para acessar o sistema.
 Certifique-se de usar as credenciais corretas para acessar o sistema com os privilégios apropriados. Em caso de dúvidas ou problemas de acesso, entre em contato com o suporte técnico.
 
